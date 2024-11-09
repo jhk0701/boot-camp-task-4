@@ -753,6 +753,7 @@ GameObject:
   - component: {fileID: 1615181788}
   - component: {fileID: 1615181790}
   - component: {fileID: 1615181789}
+  - component: {fileID: 1615181791}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -788,6 +789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a30aed1cd217e4780c1e08bd8b9b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  stat: {fileID: 0}
 --- !u!195 &1615181790
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -810,6 +813,41 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1615181791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615181787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e87acaae952f53745a46cfd4eeb884c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusStats:
+  - _value: 100
+    maxValue: 100
+    minValue: 0
+    type: 0
+  - _value: 100
+    maxValue: 100
+    minValue: 0
+    type: 1
+  - _value: 100
+    maxValue: 100
+    minValue: 0
+    type: 2
+  abilityStats:
+  - _value: 10
+    passiveValue: 0
+    type: 0
+  - _value: 10
+    passiveValue: 0
+    type: 1
+  - _value: 5
+    passiveValue: 0
+    type: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

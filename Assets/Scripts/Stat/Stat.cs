@@ -1,22 +1,6 @@
 using System;
 using UnityEngine;
 
-public enum EStatus
-{
-    Health,
-    Stamina,
-    Mana,
-}
-
-public enum EAbility
-{
-    Strength,
-    Dexterity,
-    Defense,
-    // Critical,
-    // Resistance
-}
-
 [Serializable]
 public abstract class Stat
 {
@@ -35,5 +19,4 @@ public abstract class Stat
 
     public abstract void Add(float amount);
     public abstract void Subtract(float amount);
-
 }
