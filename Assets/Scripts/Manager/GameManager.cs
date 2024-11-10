@@ -26,8 +26,13 @@ public class GameManager : Singleton<GameManager>
     IEnumerator InitializeSequence()
     {
         // TODO : 로딩창 만들 것
+
         yield return null;
-        CharacterManager.Instance.CreatePlayer();
+
+        GameObject playerObject = CharacterManager.Instance.CreatePlayer();
+
         UIManager.Instance.Initialize();
+
+        CameraManager.Instance.SetTarget(playerObject.transform);
     }
 }
