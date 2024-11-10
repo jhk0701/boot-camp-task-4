@@ -5,13 +5,14 @@ public interface IState
 
     // 구체적인 행위
     void Update();
+    void FixedUpdate();
 }
 
 public class StateMachine
 {
     protected IState currentState;
 
-    public void SetState(IState state)
+    public void ChangeState(IState state)
     {
         currentState?.Exit();
 
@@ -20,7 +21,7 @@ public class StateMachine
         currentState?.Enter();
     }
 
-    public void StateUpdate()
+    public virtual void StateUpdate()
     {
         currentState.Update();
     }

@@ -15,20 +15,31 @@ public class PassiveStat : Stat
 {
     public override float Value 
     { 
-        get => base.Value + _passiveValue; 
-        protected set => base.Value = value; 
+        get => base.Value + PassiveValue; 
+        protected set 
+        {
+            base.Value = value;
+            CallOnValueChangeEvent(Value, PassiveValue); // 현재값 (+추가값) 형태로 사용
+        } 
     }
+    
+    public float PassiveValue { get; private set; }
 
-    [SerializeField] float _passiveValue = 0f;
-    public EAbility type;
+
+    public PassiveStat(float initValue, float initPassive)
+    {
+        Value = initValue;
+        PassiveValue = initPassive;
+    }
+    
 
     public override void Add(float amount)
     {
-        _passiveValue += amount;
+        PassiveValue += amount;
     }
 
     public override void Subtract(float amount)
     {
-        _passiveValue = Mathf.Max(_passiveValue - amount, 0f);
+        PassiveValue = Mathf.Max(PassiveValue - amount, 0f);
     }
 }

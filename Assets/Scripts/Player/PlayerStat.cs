@@ -4,27 +4,27 @@ using UnityEngine;
 // TODO : 플레이어 정보 세이브 & 로드 대상
 public class PlayerStat : MonoBehaviour
 {
-    // TODO : 스크립터블로 전환하기
-    [Header("Player Stat")]
-    [SerializeField] RangedStat[] statusStats;
-    [SerializeField] PassiveStat[] abilityStats;
 
     // 로직에서 사용할 정보로 맵핑
-    public Dictionary<EStatus, RangedStat> status = new Dictionary<EStatus, RangedStat>();
-    public Dictionary<EAbility, PassiveStat> ability = new Dictionary<EAbility, PassiveStat>();
+    public Dictionary<EStatus, Stat> status = new Dictionary<EStatus, Stat>();
+    public Dictionary<EAbility, Stat> ability = new Dictionary<EAbility, Stat>();
 
 
     void Awake()
     {
-        for (int i = 0; i < statusStats.Length; i++)
-        {
-            status.Add(statusStats[i].type, statusStats[i]);
-        }
+        Initialize();
+    }
 
-        for (int i = 0; i < abilityStats.Length; i++)
-        {
-            ability.Add(abilityStats[i].type, abilityStats[i]);
-        }
+    public void Initialize()
+    {
+        // TODO : 데이터 받아올 것
+        status.Add(EStatus.Health,  new RangedStat(100f, 100f));
+        status.Add(EStatus.Stamina, new RangedStat(100f, 100f));
+        status.Add(EStatus.Mana,    new RangedStat(100f, 100f));
+
+        ability.Add(EAbility.Strength,  new PassiveStat(10, 0));
+        ability.Add(EAbility.Defense,   new PassiveStat(10, 0));
+        ability.Add(EAbility.Dexterity, new PassiveStat(5, 0));
     }
 
 

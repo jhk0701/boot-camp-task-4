@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+// TODO : 플레이어 정보 세이브 & 로드 대상
 public class PlayerLevel : MonoBehaviour
 {
     [Header("Player Level")]
@@ -19,7 +20,6 @@ public class PlayerLevel : MonoBehaviour
     }
 
     [SerializeField] float _experience = 0f;
-    [SerializeField] float _requiredExperience = 100f;
     public float Experience 
     { 
         get => _experience;
@@ -33,13 +33,15 @@ public class PlayerLevel : MonoBehaviour
                 _experience = _experience - _requiredExperience;
             }
             
-            onExperienceChanged?.Invoke(_experience / _requiredExperience);
+            onExperienceChanged?.Invoke(_experience, _requiredExperience);
         }
     }
+    [SerializeField] float _requiredExperience = 100f;
+    public float RequiredExperience { get => _requiredExperience; }
 
     public event Action<int> onLevelChanged;
-    public event Action<float> onExperienceChanged;
-    
+    public event Action<float, float> onExperienceChanged;
+
 
     public void AddExperience(float amount)
     {
