@@ -1,14 +1,12 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 
-
+[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(PlayerLevel))]
 [RequireComponent(typeof(PlayerStatus))]
 [RequireComponent(typeof(PlayerAbility))]
 [RequireComponent(typeof(PlayerProperty))]
-[RequireComponent(typeof(NavMeshAgent))]
 public class Player : MonoBehaviour
 {
     public PlayerConfig config;
@@ -22,19 +20,18 @@ public class Player : MonoBehaviour
     public Enemy Target { get; set; }
     public PlayerStateMachine stateMachine;
     
-    
 
     void Awake()
     {
         CharacterManager.Instance.Player = this;
 
+        Agent = GetComponent<NavMeshAgent>();
         Level = GetComponent<PlayerLevel>();
         Status = GetComponent<PlayerStatus>();
         Ability = GetComponent<PlayerAbility>();
         Property = GetComponent<PlayerProperty>();
-        Agent = GetComponent<NavMeshAgent>();
 
-        stateMachine = new PlayerStateMachine(GetComponent<Player>());
+        stateMachine = new PlayerStateMachine(this);
     }
 
     

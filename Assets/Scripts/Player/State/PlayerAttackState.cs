@@ -23,7 +23,7 @@ public class PlayerAttackState : PlayerBaseState
     {
         base.Update();
 
-        if (stateMachine.Player.Target.IsDead)
+        if (stateMachine.Player.Target.Status.IsDead)
         {
             stateMachine.ChangeState(stateMachine.IdleState);
             return;
@@ -38,11 +38,13 @@ public class PlayerAttackState : PlayerBaseState
 
     void Attack()
     {
-        if (stateMachine.Player.Target.IsDead) return;
+        if (stateMachine.Player.Target.Status.IsDead) 
+            return;
 
         if (IsInAttackRange() && stateMachine.Player.Target.TryGetComponent(out IDamagable damagable))
         {
-            damagable.TakeDamage(stateMachine.Player.Ability.ability[EAbility.Strength].Value);
+            // TODO : 코루틴으로 공격 방식 변경
+            damagable.TakeDamage(stateMachine.Player.Ability.GetValue(EAbility.Strength));
         }
         else
         {

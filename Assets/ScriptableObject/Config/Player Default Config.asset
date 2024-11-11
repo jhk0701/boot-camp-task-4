@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf99203e746012f4390cdca93f90ab1c, type: 3}
-  m_Name: Default Config
+  m_Name: Player Default Config
   m_EditorClassIdentifier: 
   searchCheckRate: 0.2
   attackRange: 3

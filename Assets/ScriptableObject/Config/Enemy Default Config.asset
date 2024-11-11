@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dee97909d4f444048a3155fa48a4d0eb, type: 3}
-  m_Name: Sample Enemy
+  m_Script: {fileID: 11500000, guid: 915063149e2d3e2488c340cd72905ef3, type: 3}
+  m_Name: Enemy Default Config
   m_EditorClassIdentifier: 
-  enemyName: "\uAC00\uB098\uB2E4\uB77C"
-  health:
-    _value: 100
-    <Max>k__BackingField: 100

@@ -4,6 +4,10 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     public string enemyName;
-    public RangedStat health;
-    
+    public float health = 50f;
+    public float damage = 5f;
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
+
+    // TODO : Reward 처치 보상
 }

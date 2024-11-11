@@ -11,9 +11,11 @@ public enum EAbility
     // Resistance   // 저항
 }
 
+
 public class PlayerAbility : MonoBehaviour
 {
     public Dictionary<EAbility, Stat> ability = new Dictionary<EAbility, Stat>();
+    Dictionary<EAbility, float> applying = new Dictionary<EAbility, float>();
 
     void Awake()
     {
@@ -26,7 +28,8 @@ public class PlayerAbility : MonoBehaviour
         Player player = GetComponent<Player>();
         foreach (AbilityConfig config in player.config.abilityConfigs)
         {
-            ability.Add(config.type, new PassiveStat(config.initialValue, 0f));   
+            ability.Add(config.type, new PassiveStat(config.initialValue, 0f));
+            applying.Add(config.type, config.applyingValue);
         }
     }
 
@@ -38,6 +41,16 @@ public class PlayerAbility : MonoBehaviour
     public void SubtractAbility(EAbility type, float amount)
     {
         ability[type].Subtract(amount);
+    }
+
+    public float GetValue(EAbility type)
+    {
+        if (ability.TryGetValue(type, out Stat stat))
+        {
+            return stat.Value * applying[type]; // 적용치 적용
+        }
+        else
+            return 0f;
     }
 
 }

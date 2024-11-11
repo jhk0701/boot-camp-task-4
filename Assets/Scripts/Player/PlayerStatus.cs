@@ -25,7 +25,11 @@ public class PlayerStatus : MonoBehaviour, IDamagable
 
     void Start()
     {
-        status[EStatus.Health].OnValueChange += CheckHealth;
+        status[EStatus.Health].OnValueChange += (curHp, maxHp)=>
+        {
+            if (curHp <= 0f)
+                OnPlayerDead?.Invoke();
+        };
     }
 
     public void Initialize()
@@ -34,7 +38,7 @@ public class PlayerStatus : MonoBehaviour, IDamagable
         Player player = GetComponent<Player>();
         foreach (StatusConfig config in player.config.statusConfigs)
         {
-            status.Add(config.type, new PassiveStat(config.initialValue, config.maximumValue));  
+            status.Add(config.type, new RangedStat(config.initialValue, config.maximumValue));  
         }
     }
 
@@ -51,13 +55,6 @@ public class PlayerStatus : MonoBehaviour, IDamagable
         
         status[type].Subtract(amount);
         return true;
-    }
-
-
-    void CheckHealth(float curHp, float maxHp)
-    {
-        if (curHp <= 0f)
-            OnPlayerDead?.Invoke();
     }
 
     public void TakeDamage(float amount)

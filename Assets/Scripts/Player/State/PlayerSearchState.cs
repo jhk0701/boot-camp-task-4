@@ -16,7 +16,7 @@ public class PlayerSearchState : PlayerBaseState
 
         NavMeshAgent agent = player.Agent;
         agent.isStopped = false;
-        // agent.speed = player.config.baseSpeed;
+        agent.speed = player.Ability.GetValue(EAbility.Dexterity); // 민첩에서 속도 얻기
     }
 
     public override void Update()
@@ -33,7 +33,7 @@ public class PlayerSearchState : PlayerBaseState
             else
             {
                 // 정보 갱신
-                if (stateMachine.Player.Target.IsDead)
+                if (stateMachine.Player.Target.Status.IsDead)
                 {
                     stateMachine.ChangeState(stateMachine.IdleState);
                 }

@@ -2,22 +2,21 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class StatusConfig
+public struct StatusConfig
 {
     public EStatus type;
-    public float initialValue = 100f;
-    public float maximumValue = 100f;
+    public float initialValue;
+    public float maximumValue;
 }
 
 
 [Serializable]
-public class AbilityConfig
+public struct AbilityConfig
 {
     public EAbility type;
-    public float initialValue = 5f;
-    public float applyingValue = 1f;
+    public float initialValue;
+    public float applyingValue; // 힘 n 당 1의 데미지를 얻기 등등으로 사용 예정
 }
-
 
 [CreateAssetMenu(fileName ="New Player Config", menuName = "New Player Config")]
 public class PlayerConfig : ScriptableObject

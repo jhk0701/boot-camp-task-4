@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStat : MonoBehaviour, IDamagable
+public class EnemyStatus : MonoBehaviour, IDamagable
 {
+    [field:SerializeField] public bool IsDead { get; set; }
+    
     public float health = 100f;
 
     public void TakeDamage(float amount)
@@ -12,7 +14,7 @@ public class EnemyStat : MonoBehaviour, IDamagable
         health -= amount;
         
         if(health <= 0f)
-            GetComponent<Enemy>().IsDead = true;
+            IsDead = true;
     }
 
 }
