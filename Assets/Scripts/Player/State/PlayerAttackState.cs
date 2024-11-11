@@ -13,10 +13,9 @@ public class PlayerAttackState : PlayerBaseState
         base.Enter();
         lastAttackRate = 0f;
         
-        NavMeshAgent agent = stateMachine.Player.Controller.Agent;
+        NavMeshAgent agent = stateMachine.Player.Agent;
         agent.isStopped = true;
         agent.speed = 0f;
-
         agent.SetDestination(stateMachine.Player.transform.position);
     }
 
@@ -43,7 +42,7 @@ public class PlayerAttackState : PlayerBaseState
 
         if (IsInAttackRange() && stateMachine.Player.Target.TryGetComponent(out IDamagable damagable))
         {
-            damagable.TakeDamage(stateMachine.Player.Stat.ability[EAbility.Strength].Value);
+            damagable.TakeDamage(stateMachine.Player.Ability.ability[EAbility.Strength].Value);
         }
         else
         {

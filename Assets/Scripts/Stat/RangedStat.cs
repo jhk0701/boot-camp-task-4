@@ -1,13 +1,6 @@
 using System;
 using UnityEngine;
 
-public enum EStatus
-{
-    Health,
-    Stamina,
-    Mana,
-}
-
 [Serializable]
 public class RangedStat : Stat
 {
@@ -23,7 +16,6 @@ public class RangedStat : Stat
 
     [field:SerializeField] public float Max { get; private set; }
     public float Min { get; private set; } = 0f;
-
 
     public RangedStat(float initValue, float maxValue)
     {

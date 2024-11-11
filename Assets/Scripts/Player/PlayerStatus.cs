@@ -2,13 +2,18 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO : 플레이어 정보 세이브 & 로드 대상
-public class PlayerStat : MonoBehaviour, IDamagable
+public enum EStatus
 {
+    Health,
+    Stamina,
+    Mana,
+}
 
+// TODO : 플레이어 정보 세이브 & 로드 대상
+public class PlayerStatus : MonoBehaviour, IDamagable
+{
     // 로직에서 사용할 정보로 맵핑
     public Dictionary<EStatus, Stat> status = new Dictionary<EStatus, Stat>();
-    public Dictionary<EAbility, Stat> ability = new Dictionary<EAbility, Stat>();
 
     public event Action OnPlayerDead;
 
@@ -26,13 +31,11 @@ public class PlayerStat : MonoBehaviour, IDamagable
     public void Initialize()
     {
         // TODO : 데이터 받아올 것
-        status.Add(EStatus.Health,  new RangedStat(100f, 100f));
-        status.Add(EStatus.Stamina, new RangedStat(100f, 100f));
-        status.Add(EStatus.Mana,    new RangedStat(100f, 100f));
-
-        ability.Add(EAbility.Strength,  new PassiveStat(10, 0));
-        ability.Add(EAbility.Defense,   new PassiveStat(10, 0));
-        ability.Add(EAbility.Dexterity, new PassiveStat(5, 0));
+        Player player = GetComponent<Player>();
+        foreach (StatusConfig config in player.config.statusConfigs)
+        {
+            status.Add(config.type, new PassiveStat(config.initialValue, config.maximumValue));  
+        }
     }
 
 
@@ -48,17 +51,6 @@ public class PlayerStat : MonoBehaviour, IDamagable
         
         status[type].Subtract(amount);
         return true;
-    }
-
-
-    public void AddAbility(EAbility type, float amount)
-    {
-        ability[type].Add(amount);
-    }
-
-    public void SubtractAbility(EAbility type, float amount)
-    {
-        ability[type].Subtract(amount);
     }
 
 

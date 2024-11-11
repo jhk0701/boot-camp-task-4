@@ -14,9 +14,9 @@ public class PlayerSearchState : PlayerBaseState
         base.Enter();
         Player player = stateMachine.Player;
 
-        NavMeshAgent agent = player.Controller.Agent;
+        NavMeshAgent agent = player.Agent;
         agent.isStopped = false;
-        agent.speed = player.config.baseSpeed;
+        // agent.speed = player.config.baseSpeed;
     }
 
     public override void Update()
@@ -39,7 +39,7 @@ public class PlayerSearchState : PlayerBaseState
                 }
                 else
                 {
-                    stateMachine.Player.Controller.Agent.SetDestination(stateMachine.Player.Target.transform.position);
+                    stateMachine.Player.Agent.SetDestination(stateMachine.Player.Target.transform.position);
                 }
             }
 

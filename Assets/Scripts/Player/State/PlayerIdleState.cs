@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerIdleState : PlayerBaseState
 {
@@ -8,8 +9,12 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.Player.Controller.Agent.isStopped = true;
-        stateMachine.Player.Controller.Agent.speed = 0f;
+        
+        NavMeshAgent agent = stateMachine.Player.Agent;
+
+        agent.SetDestination(stateMachine.Player.transform.position);
+        agent.isStopped = true;
+        agent.speed = 0f;
 
         // 목표물 찾기
         Enemy enemy = CharacterManager.Instance.GetNearestEnemy();

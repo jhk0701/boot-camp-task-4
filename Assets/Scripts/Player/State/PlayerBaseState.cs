@@ -9,21 +9,13 @@ public abstract class PlayerBaseState : IState
         this.stateMachine = stateMachine;
     }
 
-    public virtual void Enter()
-    {
-    }
+    public virtual void Enter() {}
 
-    public virtual void Exit()
-    {
-    }
+    public virtual void Exit() {}
 
-    public virtual void FixedUpdate()
-    {
-    }
+    public virtual void FixedUpdate(){}
 
-    public virtual void Update()
-    {
-    }
+    public virtual void Update(){}
 
 
     protected bool IsInAttackRange()

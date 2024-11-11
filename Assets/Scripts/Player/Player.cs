@@ -1,19 +1,26 @@
+using System;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(PlayerController))]
+
+
 [RequireComponent(typeof(PlayerLevel))]
-[RequireComponent(typeof(PlayerStat))]
+[RequireComponent(typeof(PlayerStatus))]
+[RequireComponent(typeof(PlayerAbility))]
 [RequireComponent(typeof(PlayerProperty))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class Player : MonoBehaviour
 {
     public PlayerConfig config;
-    public PlayerController Controller { get; private set; }
-    public PlayerLevel Level { get; private set; }
-    public PlayerStat Stat { get; private set; }
-    public PlayerProperty Property { get; private set; }
 
+    public NavMeshAgent Agent { get; private set; }
+    public PlayerLevel Level { get; private set; }
+    public PlayerStatus Status { get; private set; }
+    public PlayerAbility Ability { get; private set; }
+    public PlayerProperty Property { get; private set; }
     
     public Enemy Target { get; set; }
+    public PlayerStateMachine stateMachine;
     
     
 
@@ -21,10 +28,24 @@ public class Player : MonoBehaviour
     {
         CharacterManager.Instance.Player = this;
 
-        Controller = GetComponent<PlayerController>();
         Level = GetComponent<PlayerLevel>();
-        Stat = GetComponent<PlayerStat>();
+        Status = GetComponent<PlayerStatus>();
+        Ability = GetComponent<PlayerAbility>();
         Property = GetComponent<PlayerProperty>();
+        Agent = GetComponent<NavMeshAgent>();
+
+        stateMachine = new PlayerStateMachine(GetComponent<Player>());
+    }
+
+    
+    void Update()
+    {
+        stateMachine.StateUpdate();
+    }
+
+    void FixedUpdate()
+    {
+        stateMachine.StateFixedUpdate();
     }
     
 }
