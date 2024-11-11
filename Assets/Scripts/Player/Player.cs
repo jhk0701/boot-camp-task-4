@@ -6,11 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerProperty))]
 public class Player : MonoBehaviour
 {
-    public PlayerData data;
+    public PlayerConfig config;
     public PlayerController Controller { get; private set; }
     public PlayerLevel Level { get; private set; }
     public PlayerStat Stat { get; private set; }
     public PlayerProperty Property { get; private set; }
+
+    
+    public Enemy Target { get; set; }
+    
     
 
     void Awake()

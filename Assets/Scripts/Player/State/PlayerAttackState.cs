@@ -1,21 +1,41 @@
 using UnityEngine;
 
-public class PlayerAttackState : IState
+public class PlayerAttackState : PlayerBaseState
 {
-    
-    public void Enter()
+    float lastAttackRate = 0f;
+    public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
-    public void Exit()
+    public override void Enter()
     {
+        base.Enter();
+        lastAttackRate = 0f;
     }
 
-    public void FixedUpdate()
+    public override void Update()
     {
+        base.Update();
+
+        if (stateMachine.Player.Target.IsDead)
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+            return;
+        }
+
+        if(Time.time - lastAttackRate > stateMachine.Player.config.attackRate)
+        {
+            Attack();
+        }
     }
 
-    public void Update()
+    void Attack()
     {
+        if (stateMachine.Player.Target.IsDead) return;
+
+        if(stateMachine.Player.Target.TryGetComponent(out IDamagable damagable))
+        {
+            damagable.TakeDamage(stateMachine.Player.Stat.ability[EAbility.Strength].Value);
+        }
     }
 }

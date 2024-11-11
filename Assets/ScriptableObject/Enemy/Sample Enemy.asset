@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Sample Enemy
   m_EditorClassIdentifier: 
   enemyName: "\uAC00\uB098\uB2E4\uB77C"
+  health:
+    _value: 100
+    <Max>k__BackingField: 100

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public NavMeshAgent Agent { get; private set; }
     public PlayerStateMachine stateMachine;
 
+
     void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();

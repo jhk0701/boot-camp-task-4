@@ -9,7 +9,7 @@ public class UIPropertyText : MonoBehaviour
     void Start()
     {
         Property property = CharacterManager.Instance.Player.Property.properties[target];
-        property.onValueChange += UpdateUI;
+        property.OnValueChange += UpdateUI;
         UpdateUI(property.Value);
     }
 

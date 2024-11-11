@@ -16,7 +16,6 @@ public class PlayerProperty : MonoBehaviour
         Initiailze();
     }
 
-
     public void Initiailze()
     {
         // TODO : 데이터 받아올 것

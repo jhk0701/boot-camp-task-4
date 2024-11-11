@@ -21,7 +21,7 @@ public class RangedStat : Stat
         }
     }
 
-    public float Max { get; private set; }
+    [field:SerializeField] public float Max { get; private set; }
     public float Min { get; private set; } = 0f;
 
 

@@ -16,10 +16,10 @@ public class Property
         private set
         {
             _value = value;
-            onValueChange?.Invoke(Value);
+            OnValueChange?.Invoke(Value);
         }
     }
-    public event Action<ulong> onValueChange;
+    public event Action<ulong> OnValueChange;
 
 
     public Property(ulong value)

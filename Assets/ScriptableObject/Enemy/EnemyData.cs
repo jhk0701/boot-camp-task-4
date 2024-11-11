@@ -4,5 +4,6 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     public string enemyName;
+    public RangedStat health;
     
 }

@@ -10,8 +10,10 @@ public class PlayerStateMachine : StateMachine
     {
         Player = player;
 
-        IdleState = new PlayerIdleState();
-        SearchState = new PlayerSearchState();
-        AttackState = new PlayerAttackState();
+        IdleState = new PlayerIdleState(this);
+        SearchState = new PlayerSearchState(this);
+        AttackState = new PlayerAttackState(this);
+
+        ChangeState(IdleState);
     }
 }

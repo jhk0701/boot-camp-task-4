@@ -1,18 +1,26 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 // TODO : 플레이어 정보 세이브 & 로드 대상
-public class PlayerStat : MonoBehaviour
+public class PlayerStat : MonoBehaviour, IDamagable
 {
 
     // 로직에서 사용할 정보로 맵핑
     public Dictionary<EStatus, Stat> status = new Dictionary<EStatus, Stat>();
     public Dictionary<EAbility, Stat> ability = new Dictionary<EAbility, Stat>();
 
+    public event Action OnPlayerDead;
+
 
     void Awake()
     {
         Initialize();
+    }
+
+    void Start()
+    {
+        status[EStatus.Health].OnValueChange += CheckHealth;
     }
 
     public void Initialize()
@@ -42,6 +50,7 @@ public class PlayerStat : MonoBehaviour
         return true;
     }
 
+
     public void AddAbility(EAbility type, float amount)
     {
         ability[type].Add(amount);
@@ -51,4 +60,17 @@ public class PlayerStat : MonoBehaviour
     {
         ability[type].Subtract(amount);
     }
+
+
+    void CheckHealth(float curHp, float maxHp)
+    {
+        if (curHp <= 0f)
+            OnPlayerDead?.Invoke();
+    }
+
+    public void TakeDamage(float amount)
+    {
+        status[EStatus.Health].Subtract(amount);
+    }
+
 }
