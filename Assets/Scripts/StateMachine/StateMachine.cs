@@ -26,4 +26,9 @@ public class StateMachine
         currentState.Update();
     }
 
+    public virtual void StateFixedUpdate()
+    {
+        currentState.FixedUpdate();
+    }
+
 }

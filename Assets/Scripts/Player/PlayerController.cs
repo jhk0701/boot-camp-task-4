@@ -5,13 +5,22 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public NavMeshAgent Agent { get; private set; }
-    public StateMachine stateMachine;
+    public PlayerStateMachine stateMachine;
 
     void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
 
-        stateMachine = new PlayerStateMachine();
+        stateMachine = new PlayerStateMachine(GetComponent<Player>());
     }
     
+    void Update()
+    {
+        stateMachine.StateUpdate();
+    }
+
+    void FixedUpdate()
+    {
+        stateMachine.StateFixedUpdate();
+    }
 }
