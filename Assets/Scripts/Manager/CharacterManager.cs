@@ -6,7 +6,7 @@ public class CharacterManager : Singleton<CharacterManager>
 {
     public Player Player { get; set; }
 
-    public List<Enemy> enemies;
+    public List<Enemy> enemies = new List<Enemy>();
 
     public GameObject CreatePlayer()
     {
@@ -17,6 +17,9 @@ public class CharacterManager : Singleton<CharacterManager>
     // TODO 최적화 필요
     public Enemy GetNearestEnemy()
     {
-        return enemies.Where(n=>!n.IsDead).OrderBy(n => Vector3.SqrMagnitude(n.transform.position - Player.transform.position)).ElementAt(0);
+        var alives = enemies.Where(n=>!n.IsDead);
+        if (alives.Count() == 0) return null;
+
+        return alives.OrderBy(n => Vector3.SqrMagnitude(n.transform.position - Player.transform.position)).ElementAt(0);
     }
 }

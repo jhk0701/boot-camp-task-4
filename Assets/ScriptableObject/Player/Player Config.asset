@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Player Config
   m_EditorClassIdentifier: 
   baseSpeed: 10
+  searchCheckRate: 0.5
+  attackRange: 3
+  attackRate: 0.5

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerConfig: ScriptableObject
 {
     public float baseSpeed = 10f;
-    
+
     [Header("Search")]
     public float searchCheckRate = 0.2f;
 

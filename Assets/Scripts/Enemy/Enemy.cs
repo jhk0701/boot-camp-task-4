@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public EnemyData data;
-    [field:SerializeField] public bool IsDead {get; set;}
+    [field:SerializeField] public bool IsDead { get; set; }
 
     void Awake()
     {

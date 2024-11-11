@@ -24,4 +24,14 @@ public abstract class PlayerBaseState : IState
     public virtual void Update()
     {
     }
+
+
+    protected bool IsInAttackRange()
+    {
+        Player player = stateMachine.Player;
+        float sqrDistance = (player.transform.position - player.Target.transform.position).sqrMagnitude;
+        float attackRange = player.config.attackRange;
+
+        return sqrDistance <= attackRange * attackRange;
+    }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerAttackState : PlayerBaseState
 {
@@ -11,6 +12,12 @@ public class PlayerAttackState : PlayerBaseState
     {
         base.Enter();
         lastAttackRate = 0f;
+        
+        NavMeshAgent agent = stateMachine.Player.Controller.Agent;
+        agent.isStopped = true;
+        agent.speed = 0f;
+
+        agent.SetDestination(stateMachine.Player.transform.position);
     }
 
     public override void Update()
@@ -23,8 +30,9 @@ public class PlayerAttackState : PlayerBaseState
             return;
         }
 
-        if(Time.time - lastAttackRate > stateMachine.Player.config.attackRate)
+        if (Time.time - lastAttackRate > stateMachine.Player.config.attackRate)
         {
+            lastAttackRate = Time.time;
             Attack();
         }
     }
@@ -33,9 +41,13 @@ public class PlayerAttackState : PlayerBaseState
     {
         if (stateMachine.Player.Target.IsDead) return;
 
-        if(stateMachine.Player.Target.TryGetComponent(out IDamagable damagable))
+        if (IsInAttackRange() && stateMachine.Player.Target.TryGetComponent(out IDamagable damagable))
         {
             damagable.TakeDamage(stateMachine.Player.Stat.ability[EAbility.Strength].Value);
+        }
+        else
+        {
+            stateMachine.ChangeState(stateMachine.SearchState);
         }
     }
 }

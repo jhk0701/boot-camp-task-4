@@ -19,27 +19,21 @@ public class PlayerSearchState : PlayerBaseState
         agent.speed = player.config.baseSpeed;
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void Update()
     {
         base.Update();
         if (Time.time - lastCheckTime > stateMachine.Player.config.searchCheckRate)
         {
             lastCheckTime = Time.time;
-            
 
-            if (IsInAttackRange())
+            if (IsInAttackRange()) // 공격 개시
             {
                 stateMachine.ChangeState(stateMachine.AttackState);
             }
             else
             {
-                // 갱신
-                if(stateMachine.Player.Target.IsDead)
+                // 정보 갱신
+                if (stateMachine.Player.Target.IsDead)
                 {
                     stateMachine.ChangeState(stateMachine.IdleState);
                 }
@@ -52,15 +46,4 @@ public class PlayerSearchState : PlayerBaseState
         }
         
     }
-
-    bool IsInAttackRange()
-    {
-        Player player = stateMachine.Player;
-        float sqrDistance = (player.transform.position - player.Target.transform.position).sqrMagnitude;
-        float attackRange = player.config.attackRange;
-        
-        return sqrDistance <= attackRange * attackRange;
-    }
-
-    
 }
