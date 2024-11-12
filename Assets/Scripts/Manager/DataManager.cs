@@ -3,7 +3,13 @@ using System.IO;
 
 public class DataManager : Singleton<DataManager>
 {
-    string savePath = Application.persistentDataPath;
+    string savePath;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        savePath = Application.persistentDataPath;
+    }
 
     public void SaveData<T>(T data)
     {

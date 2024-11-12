@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
 
         GameObject playerObject = CharacterManager.Instance.CreatePlayer();
 
-        InGameUIManager.Instance.Initialize();
+        UIManagerGame.Instance.Initialize();
 
         CameraManager.Instance.SetTarget(playerObject.transform);
     }

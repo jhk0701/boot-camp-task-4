@@ -10,6 +10,10 @@ namespace CustomData
         public const string PATH_ENEMY = "Prefabs/Enemies/";
 
         public const string PATH_IN_GAME_CANVAS = "Prefabs/UI/In Game Canvas";
+
+        // 씬 이름
+        public const string SCENE_START = "StartScene";
+        public const string SCENE_GAME = "GameScene";
     }
 
     [Serializable]
@@ -20,5 +24,6 @@ namespace CustomData
         public ulong jewelry;
 
         // TODO : 아이템 보상
+        public ItemData[] items;
     }
 }
