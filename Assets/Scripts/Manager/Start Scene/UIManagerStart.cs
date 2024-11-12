@@ -17,4 +17,10 @@ public class UIManagerStart : Singleton<UIManagerStart>
         modal.SetActive(true);
         uiModal.Open();
     }
+
+    public void CloseModal(UIModal uiModal)
+    {
+        modal.SetActive(false);
+        uiModal.Close();
+    }
 }

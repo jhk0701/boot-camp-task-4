@@ -3,12 +3,14 @@ using System.IO;
 
 [RequireComponent(typeof(Property))]
 [RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(Equipment))]
 public class DataManager : Singleton<DataManager>
 {
     string savePath;
 
     public Inventory Inventory { get; private set; }
     public Property Property { get; private set; }
+    public Equipment Equipment { get; private set; }
 
 
     void Awake()
@@ -18,6 +20,7 @@ public class DataManager : Singleton<DataManager>
 
         Inventory = GetComponent<Inventory>();
         Property = GetComponent<Property>();
+        Equipment = GetComponent<Equipment>();
     }
 
     public void SaveData<T>(T data)

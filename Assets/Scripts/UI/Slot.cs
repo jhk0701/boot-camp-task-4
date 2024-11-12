@@ -14,8 +14,7 @@ public abstract class Slot : MonoBehaviour
 
     protected event Action<int> OnSelect;
 
-
-    public void Initialize(int id, Action<int> selectedAction)
+    public virtual void Initialize(int id, Action<int> selectedAction)
     {
         index = id;
 
@@ -35,8 +34,6 @@ public abstract class Slot : MonoBehaviour
     public virtual void Clear()
     {
         icon.sprite = defaultIcon;
-        icon.enabled = false;
-
         quantityText.text = string.Empty;
     }
 

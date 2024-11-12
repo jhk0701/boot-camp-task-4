@@ -10,8 +10,8 @@ public class Item
 
 public class Inventory : MonoBehaviour
 {
-    const int MAX_SIZE = 48;
-    public Item[] items;
+    const int MAX_SIZE = 49;
+    public Item[] items = new Item[MAX_SIZE];
 
     
     public event Action<int> OnChanged;
@@ -19,11 +19,11 @@ public class Inventory : MonoBehaviour
 
     void Awake()
     {
-        items = new Item[MAX_SIZE];
-        for (int i = 0; i < MAX_SIZE; i++)
-        {
-            items[i] = new Item();
-        }
+        // items = new Item[MAX_SIZE];
+        // for (int i = 0; i < MAX_SIZE; i++)
+        // {
+        //     items[i] = new Item();
+        // }
     }
 
     public void AddItem(ItemData data)
