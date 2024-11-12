@@ -11,7 +11,7 @@ public class Detector : MonoBehaviour
     void Awake()
     {
         _collider = GetComponent<SphereCollider>();
-        _collider.radius = CharacterManager.Instance.enemyConfig.detectDistance;
+        _collider.radius = enemy.data.detectDistance;
     }
 
 
@@ -20,7 +20,7 @@ public class Detector : MonoBehaviour
         if (IsMatched(layerMask.value, other.gameObject.layer))
         {
             if (other.gameObject.TryGetComponent(out Player player))
-                enemy.Target = player;
+                enemy.Target = player.transform;
         }
     }
 

@@ -35,16 +35,16 @@ public class EnemyIdleState : EnemyBaseState
 
     void Wait()
     {
-        EnemyConfig config = CharacterManager.Instance.enemyConfig;
-        float waitTime = Random.Range(config.minWanderWaitTime, config.maxWanderWaitTime);
+        Enemy enemy = stateMachine.Enemy;
+        float waitTime = Random.Range(enemy.data.minWanderWaitTime, enemy.data.maxWanderWaitTime);
 
         if(IdleHandler != null)
         {
-            stateMachine.Enemy.StopCoroutine(IdleHandler);
+            enemy.StopCoroutine(IdleHandler);
             IdleHandler = null;
         }
 
-        IdleHandler = stateMachine.Enemy.StartCoroutine(Idle(waitTime));
+        IdleHandler = enemy.StartCoroutine(Idle(waitTime));
     }
 
     Coroutine IdleHandler;

@@ -15,7 +15,7 @@ public class EnemyWanderState : EnemyBaseState
         enemy.Agent.isStopped = false;
         enemy.Agent.speed = enemy.data.walkSpeed;
 
-        Vector3 position = GetNewDestination();
+        Vector3 position = GetWanderDestination();
         enemy.Agent.SetDestination(position);
     }
 
@@ -35,21 +35,21 @@ public class EnemyWanderState : EnemyBaseState
         }
     }
 
-    Vector3 GetNewDestination()
+    Vector3 GetWanderDestination()
     {
-        EnemyConfig config = CharacterManager.Instance.enemyConfig;
-        Vector3 position = stateMachine.Enemy.transform.position + Random.onUnitSphere * Random.Range(config.minWanderDistance, config.maxWanderDistance);
+        Enemy enemy = stateMachine.Enemy;
+        Vector3 position = enemy.transform.position + Random.onUnitSphere * Random.Range(enemy.data.minWanderDistance, enemy.data.maxWanderDistance);
         NavMeshHit hit;
         int tryCount = 0;
         do
         {
             tryCount++;
-            if (NavMesh.SamplePosition(position, out hit, config.detectDistance, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(position, out hit, enemy.data.detectDistance, NavMesh.AllAreas))
             {
                 return hit.position;
             }
         }
-        while(tryCount < config.maxTryOfSamplePosition);
+        while(tryCount < enemy.data.maxTryOfSamplePosition);
 
         return Vector3.zero;
     }

@@ -7,7 +7,6 @@ public class CharacterManager : Singleton<CharacterManager>
 
     public Player Player { get; set; }
 
-    public EnemyConfig enemyConfig;
     public List<Enemy> enemies = new List<Enemy>();
 
     

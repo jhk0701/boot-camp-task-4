@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,8 +11,19 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent Agent { get; private set; }
     public EnemyStatus Status { get; private set; }
 
-    public Player Target { get; set; }
     public EnemyStateMachine stateMachine;
+
+    Transform _target;
+    public Transform Target 
+    { 
+        get => _target; 
+        set 
+        {
+            _target = value;
+            OnTargetDetected?.Invoke();
+        } 
+    }
+    public event Action OnTargetDetected;
 
 
     void Awake()

@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour, IDamagable
 {
-    [field:SerializeField] public bool IsDead { get; set; }
+    public bool IsDead { get; private set; }
     
     public float health = 100f;
 
