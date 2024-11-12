@@ -48,5 +48,12 @@ public class UIEquipment : UIModal
     void SelectSlot(int id)
     {
         // unequip
+        EEquipment type = (EEquipment)id;
+        EquipableItemData data;
+        if (equipment.equipments.TryGetValue(type, out data) && data != null)
+        {
+            DataManager.Instance.Inventory.AddItem(data);
+            equipment.Unequip(type);
+        }
     }
 }

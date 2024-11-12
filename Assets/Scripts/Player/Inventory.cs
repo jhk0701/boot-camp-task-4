@@ -63,9 +63,7 @@ public class Inventory : MonoBehaviour
                 continue;
 
             if (items[i].data == data)
-            {
                 return items[i];
-            }
         }
 
         return null;
@@ -126,6 +124,7 @@ public class Inventory : MonoBehaviour
     {
         Vector3 position = transform.position + Vector3.up + transform.forward * 0.5f;
         // Instantiate(data.dropPrefab, position, Quaternion.identity);
+        Debug.Log("Item destroy");
     }    
     
     public void ThrowItem(int index)
@@ -137,7 +136,7 @@ public class Inventory : MonoBehaviour
     public bool RemoveItem(int index, int amount = 1)
     {
         Item item = items[index];
-        
+
         if (item.quantity < amount)
             return false;
 
