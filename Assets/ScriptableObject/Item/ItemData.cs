@@ -9,5 +9,6 @@ public abstract class ItemData : ScriptableObject
     public Sprite icon;
 
     public ulong price;
-        
+
+    public abstract string GetItemInfo();        
 }

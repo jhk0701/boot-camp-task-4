@@ -1,20 +1,36 @@
 using UnityEngine;
+using TMPro;
 
 public class UIInventory : UIModal
 {
+    Inventory inventory;
+
     [SerializeField] Transform slotContainer;
     [SerializeField] ItemSlot[] slots;
 
+    [Header("Selected")]
+    [SerializeField] GameObject selectOption;
+    [SerializeField] TextMeshProUGUI selectedItemName;
+    [SerializeField] TextMeshProUGUI selectedItemEffects;
+    [SerializeField] GameObject useButton;
+    [SerializeField] GameObject equipButton;
+    int selectedIndex = -1;
+
+
     void Awake()
     {
+        inventory = DataManager.Instance.Inventory;
+
         slots = new ItemSlot[slotContainer.childCount];
         for (int i = 0; i < slotContainer.childCount; i++)
         {
             slots[i] = slotContainer.GetChild(i).GetComponent<ItemSlot>();
             slots[i].Initialize(i, SelectSlot);
 
-            slots[i].Set();
+            slots[i].Clear();
         }
+
+        selectOption.SetActive(false);
     }
 
     public override void Initialize()
@@ -32,6 +48,57 @@ public class UIInventory : UIModal
 
     void SelectSlot(int id)
     {
+        ItemData data = inventory.items[id].data;
 
+        if(data == null)
+        {
+            selectOption.SetActive(false);
+            return;
+        }
+        
+        selectedIndex = id;
+
+        DisplaySelectedItem(data);
+    }
+
+    void DisplaySelectedItem(ItemData data)
+    {
+        selectOption.SetActive(true);
+
+        selectedItemName.text = data.name;
+        selectedItemEffects.text = data.GetItemInfo();
+        
+        if (data is ConsumableItemData)
+        {
+            useButton.SetActive(true);
+            equipButton.SetActive(false);
+        }
+        else if(data is EquipableItemData)
+        {
+            useButton.SetActive(false);
+            equipButton.SetActive(true);
+        }
+    }
+
+    public void OnClickUse()
+    {
+        Item item = inventory.items[selectedIndex];
+        ConsumableItemData data = item.data as ConsumableItemData;
+
+        if (data != null)
+        {
+            foreach (ConsumeEffect effect in data.effects)
+                effect.Use();
+
+            inventory.RemoveItem(item.data, 1);
+        }
+
+        slots[selectedIndex].Set();
+        SelectSlot(selectedIndex);
+    }
+
+    public void OnClickEquip()
+    {
+        // RemoveItem();
     }
 }

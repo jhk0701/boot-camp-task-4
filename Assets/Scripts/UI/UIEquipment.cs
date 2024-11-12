@@ -13,6 +13,8 @@ public class UIEquipment : UIModal
         {
             slots[i].Initialize((int)slots[i].type, SelectSlot);
             equipment.Add(slots[i].type, slots[i]);
+
+            slots[i].Clear();
         }
     }
 
@@ -31,6 +33,6 @@ public class UIEquipment : UIModal
 
     void SelectSlot(int id)
     {
-
+        // unequip
     }
 }
