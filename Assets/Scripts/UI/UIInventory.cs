@@ -6,7 +6,7 @@ public class UIInventory : UIModal
     Inventory inventory;
 
     [SerializeField] Transform slotContainer;
-    [SerializeField] ItemSlot[] slots;
+    [SerializeField] Slot[] slots;
 
     [Header("Selected")]
     [SerializeField] GameObject selectOption;

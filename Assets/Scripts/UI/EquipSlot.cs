@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class EquipSlot : Slot
 {    
@@ -23,7 +22,7 @@ public class EquipSlot : Slot
             Clear();
             return;
         }
-        
+
         icon.sprite = data.icon;
         quantityText.text = ""; // TODO : 업그레이드 정보
 

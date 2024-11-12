@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIEquipment : UIModal
 {
     Equipment equipment;
 
-    [SerializeField] EquipSlot[] slots;
+    [SerializeField] Transform slotContainer;
     Dictionary<EEquipment, EquipSlot> equipSlot;
 
     void Awake()
@@ -13,12 +14,15 @@ public class UIEquipment : UIModal
         equipment = DataManager.Instance.Equipment;
 
         equipSlot = new Dictionary<EEquipment, EquipSlot>();
-        for (int i = 0; i < slots.Length; i++)
-        {
-            slots[i].Initialize((int)slots[i].type, SelectSlot);
-            equipSlot.Add(slots[i].type, slots[i]);
 
-            slots[i].Clear();
+        
+        for (int i = 0; i < slotContainer.childCount; i++)
+        {
+            EquipSlot slot = slotContainer.GetChild(i).GetComponent<EquipSlot>();
+            slot.Initialize((int)slot.type, SelectSlot);
+            equipSlot.Add(slot.type, slot);
+
+            slot.Clear();
         }
 
         equipment.OnEquipItem += (type)=>
@@ -39,9 +43,10 @@ public class UIEquipment : UIModal
 
     void UpdateUI()
     {
-        for (int i = 0; i < slots.Length; i++)
+        var keys = equipSlot.Keys.ToArray();
+        for (int i = 0; i < keys.Length; i++)
         {
-            slots[i].Set();
+            equipSlot[keys[i]].Set();
         }
     }
 
