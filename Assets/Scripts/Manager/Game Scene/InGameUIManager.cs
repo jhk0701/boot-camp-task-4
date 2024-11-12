@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class UIManager : Singleton<UIManager>
+public class InGameUIManager : Singleton<InGameUIManager>
 {
 
     public void Initialize()

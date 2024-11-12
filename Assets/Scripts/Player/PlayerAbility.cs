@@ -47,7 +47,7 @@ public class PlayerAbility : MonoBehaviour
     {
         if (ability.TryGetValue(type, out Stat stat))
         {
-            return stat.Value * applying[type]; // 적용치 적용
+            return stat.Value / applying[type]; // 적용치 적용
         }
         else
             return 0f;
