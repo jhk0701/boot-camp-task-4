@@ -21,7 +21,10 @@ public class ItemSlot : Slot
 
         Item item = inventory.items[index];
         icon.sprite = item.data.icon;
+        
+        quantityText.gameObject.SetActive(!(item.data is EquipableItemData));
         quantityText.text = item.quantity.ToString();
+        
     }
 
 }

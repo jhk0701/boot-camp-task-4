@@ -3,19 +3,33 @@ using UnityEngine;
 
 public class UIEquipment : UIModal
 {
+    Equipment equipment;
+
     [SerializeField] EquipSlot[] slots;
-    Dictionary<EEquipment, EquipSlot> equipment;
+    Dictionary<EEquipment, EquipSlot> equipSlot;
 
     void Awake()
     {
-        equipment = new Dictionary<EEquipment, EquipSlot>();
+        equipment = DataManager.Instance.Equipment;
+
+        equipSlot = new Dictionary<EEquipment, EquipSlot>();
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].Initialize((int)slots[i].type, SelectSlot);
-            equipment.Add(slots[i].type, slots[i]);
+            equipSlot.Add(slots[i].type, slots[i]);
 
             slots[i].Clear();
         }
+
+        equipment.OnEquipItem += (type)=>
+        {
+            equipSlot[type].Set();
+        };
+
+        equipment.OnUnequipItem += (type)=>
+        {
+            equipSlot[type].Clear();
+        };
     }
 
     public override void Initialize()

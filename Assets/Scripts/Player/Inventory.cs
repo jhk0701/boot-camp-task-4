@@ -137,6 +137,7 @@ public class Inventory : MonoBehaviour
     public bool RemoveItem(int index, int amount = 1)
     {
         Item item = items[index];
+        
         if (item.quantity < amount)
             return false;
 
@@ -160,33 +161,6 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public bool RemoveItem(ItemData data, int amount = 1)
-    {
-        int index = -1;
-        Item item = FindItem(data, out index);
-
-        if(item.quantity < amount) 
-            return false;
-
-        if(CanStack(item.data))
-        {
-            item.quantity -= amount;
-
-            if (item.quantity <= 0)
-            {
-                item.data = null;
-                item.quantity = 0;
-            }
-        }
-        else
-        {
-            item.data = null;
-            item.quantity = 0;
-        }
-
-        OnChanged?.Invoke(index);
-        return true;
-    }
 
     bool CanStack(ItemData data)
     {

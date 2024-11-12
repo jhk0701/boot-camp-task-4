@@ -30,7 +30,7 @@ public class ConsumableItemData : ItemData
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < effects.Length; i++)
         {
-            sb.Append($"{effects[i].type} : {effects[i].value}");
+            sb.Append($"{effects[i].type} : {effects[i].value}\n");
         }
 
         return sb.ToString();

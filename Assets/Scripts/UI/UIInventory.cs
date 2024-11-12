@@ -21,6 +21,12 @@ public class UIInventory : UIModal
     {
         inventory = DataManager.Instance.Inventory;
 
+        inventory.OnChanged += (index) => 
+        {
+            slots[index].Set();
+            SelectSlot(index);
+        };
+
         slots = new ItemSlot[slotContainer.childCount];
         for (int i = 0; i < slotContainer.childCount; i++)
         {
@@ -65,7 +71,7 @@ public class UIInventory : UIModal
     {
         selectOption.SetActive(true);
 
-        selectedItemName.text = data.name;
+        selectedItemName.text = data.itemName;
         selectedItemEffects.text = data.GetItemInfo();
         
         if (data is ConsumableItemData)
@@ -85,20 +91,24 @@ public class UIInventory : UIModal
         Item item = inventory.items[selectedIndex];
         ConsumableItemData data = item.data as ConsumableItemData;
 
-        if (data != null)
-        {
-            foreach (ConsumeEffect effect in data.effects)
-                effect.Use();
+        if (data == null) return;
 
-            inventory.RemoveItem(item.data, 1);
-        }
+        foreach (ConsumeEffect effect in data.effects)
+            effect.Use();
 
-        slots[selectedIndex].Set();
-        SelectSlot(selectedIndex);
+        inventory.RemoveItem(selectedIndex, 1);
     }
 
     public void OnClickEquip()
     {
-        // RemoveItem();
+        Item item = inventory.items[selectedIndex];
+        EquipableItemData data = item.data as EquipableItemData;
+
+        if(data == null) return;
+
+        DataManager.Instance.Equipment.Equip(data);
+        inventory.RemoveItem(selectedIndex);
+        
+        UpdateUI();
     }
 }
