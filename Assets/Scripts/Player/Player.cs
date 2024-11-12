@@ -34,6 +34,10 @@ public class Player : MonoBehaviour
         stateMachine = new PlayerStateMachine(this);
     }
 
+    void Start()
+    {
+        stateMachine.ChangeState(stateMachine.IdleState);
+    }
     
     void Update()
     {

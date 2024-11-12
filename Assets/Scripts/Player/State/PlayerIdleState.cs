@@ -9,7 +9,6 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void Enter()
     {
-        
         NavMeshAgent agent = stateMachine.Player.Agent;
 
         agent.SetDestination(stateMachine.Player.transform.position);
@@ -20,8 +19,8 @@ public class PlayerIdleState : PlayerBaseState
         Enemy enemy = CharacterManager.Instance.GetNearestEnemy();
         if(enemy != null)
         {
-            stateMachine.ChangeState(stateMachine.SearchState);
             stateMachine.Player.Target = enemy;
+            stateMachine.ChangeState(stateMachine.SearchState);
         }
         else
         {

@@ -33,13 +33,13 @@ public class EnemyAttackState : EnemyBaseState
 
         lastCheckTime = Time.time;
 
-        if (IsInAttackRange(out bool isInDetectRange))
+        if (IsInAttackRange(out bool isInFollowRange))
         {
             Attack();
         }
         else
         {
-            if (isInDetectRange)
+            if (isInFollowRange)
             {
                 FollowTarget();
             }
@@ -50,15 +50,15 @@ public class EnemyAttackState : EnemyBaseState
         }
     }
 
-    bool IsInAttackRange(out bool isInDetectRange)
+    bool IsInAttackRange(out bool isInFollowRange)
     {
         Enemy enemy = stateMachine.Enemy;
-        float detectRange = enemy.data.detectRange;
+        float followRange = enemy.data.followRange;
         float attackRange = enemy.data.attackRange;
 
         float sqrDistance = (enemy.transform.position - enemy.Target.position).sqrMagnitude;
         
-        isInDetectRange = sqrDistance <= detectRange * detectRange;
+        isInFollowRange = sqrDistance <= followRange * followRange;
         
         return sqrDistance <= attackRange * attackRange;
     }
@@ -72,6 +72,13 @@ public class EnemyAttackState : EnemyBaseState
 
             if(enemy.Target.TryGetComponent(out IDamagable damagable))
             {
+                if (damagable.IsDead)
+                {
+                    Debug.Log("Target is dead");
+                    stateMachine.ChangeState(stateMachine.IdleState);
+                    return;
+                }
+
                 damagable.TakeDamage(enemy.data.damage);
             }   
         }

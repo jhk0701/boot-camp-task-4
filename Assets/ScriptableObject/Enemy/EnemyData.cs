@@ -10,7 +10,7 @@ public class EnemyData : ScriptableObject
 
     [Header("Detect")]
     public float detectDistance = 10f;
-    public float detectRange = 10f;
+    public float followRange = 20f;
     public float checkRate = 0.5f;
     
     [Header("Battle")]

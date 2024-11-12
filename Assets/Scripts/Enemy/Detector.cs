@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// 특정 레이어를 감지 하는 기능
 [RequireComponent(typeof(SphereCollider))]
 public class Detector : MonoBehaviour
 {
@@ -24,10 +25,8 @@ public class Detector : MonoBehaviour
         }
     }
 
-    // 추적을 포기하는 건 enemy state에서 처리
-
     bool IsMatched(int value, int layer)
     {
-        return value == (1 << layer | value);
+        return value == ((1 << layer) | value);
     }
 }

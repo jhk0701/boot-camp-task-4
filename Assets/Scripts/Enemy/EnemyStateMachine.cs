@@ -9,7 +9,10 @@ public class EnemyStateMachine : StateMachine
     public EnemyStateMachine(Enemy enemy)
     {
         Enemy = enemy;
-        Enemy.OnTargetDetected += ()=>{ ChangeState(AttackState); };
+        Enemy.OnTargetDetected += ()=>
+        { 
+            ChangeState(AttackState); 
+        };
 
         IdleState = new EnemyIdleState(this);
         WanderState = new EnemyWanderState(this);

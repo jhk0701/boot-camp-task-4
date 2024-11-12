@@ -15,6 +15,8 @@ public class PlayerStatus : MonoBehaviour, IDamagable
     // 로직에서 사용할 정보로 맵핑
     public Dictionary<EStatus, Stat> status = new Dictionary<EStatus, Stat>();
 
+    public bool IsDead { get => status[EStatus.Health].Value <= 0f; }
+
     public event Action OnPlayerDead;
 
 

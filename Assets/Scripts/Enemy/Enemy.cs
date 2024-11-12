@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
         set 
         {
             _target = value;
+            Debug.Log("OnTargetDetected");
             OnTargetDetected?.Invoke();
         } 
     }

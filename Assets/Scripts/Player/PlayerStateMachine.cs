@@ -13,7 +13,5 @@ public class PlayerStateMachine : StateMachine
         IdleState = new PlayerIdleState(this);
         SearchState = new PlayerSearchState(this);
         AttackState = new PlayerAttackState(this);
-
-        ChangeState(IdleState);
     }
 }
