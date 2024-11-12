@@ -288,3 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b99e6cd83ccebe439124973616d188f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 2031672316668478592}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
