@@ -4,5 +4,17 @@ using UnityEngine;
 
 public class UIManagerStart : Singleton<UIManagerStart>
 {
-    
+    public GameObject modal;
+
+    public UIModal inventory;
+    public UIModal shop;
+
+    public void OpenModal(UIModal uiModal)
+    {
+        if (modal.activeInHierarchy)
+            return;
+
+        modal.SetActive(true);
+        uiModal.Open();
+    }
 }

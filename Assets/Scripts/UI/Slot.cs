@@ -8,10 +8,11 @@ public abstract class Slot : MonoBehaviour
     public int index;
     
     [SerializeField] protected Image icon;
+    [SerializeField] protected Sprite defaultIcon;
     [SerializeField] protected TextMeshProUGUI quantityText;
     [SerializeField] protected Button selectButton;
 
-    protected event Action<int> onSelect;
+    protected event Action<int> OnSelect;
 
 
     public void Initialize(int id, Action<int> selectedAction)
@@ -23,7 +24,7 @@ public abstract class Slot : MonoBehaviour
         else
         {   
             selectButton.interactable = true;
-            onSelect = selectedAction;
+            OnSelect = selectedAction;
         }
 
         Set();
@@ -33,7 +34,7 @@ public abstract class Slot : MonoBehaviour
     
     public virtual void Clear()
     {
-        icon.sprite = null;
+        icon.sprite = defaultIcon;
         icon.enabled = false;
 
         quantityText.text = string.Empty;
@@ -41,6 +42,6 @@ public abstract class Slot : MonoBehaviour
 
     public virtual void Select()
     {
-        onSelect?.Invoke(index);
+        OnSelect?.Invoke(index);
     }
 }

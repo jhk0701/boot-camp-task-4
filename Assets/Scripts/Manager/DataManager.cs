@@ -1,14 +1,23 @@
 using UnityEngine;
 using System.IO;
 
+[RequireComponent(typeof(Property))]
+[RequireComponent(typeof(Inventory))]
 public class DataManager : Singleton<DataManager>
 {
     string savePath;
+
+    public Inventory Inventory { get; private set; }
+    public Property Property { get; private set; }
+
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
         savePath = Application.persistentDataPath;
+
+        Inventory = GetComponent<Inventory>();
+        Property = GetComponent<Property>();
     }
 
     public void SaveData<T>(T data)
@@ -23,3 +32,4 @@ public class DataManager : Singleton<DataManager>
         return JsonUtility.FromJson<T>(file);
     }
 }
+

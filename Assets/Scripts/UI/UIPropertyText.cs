@@ -8,7 +8,7 @@ public class UIPropertyText : MonoBehaviour
 
     void Start()
     {
-        Property property = CharacterManager.Instance.Player.Property.properties[target];
+        PositiveValue property = DataManager.Instance.Property.properties[target];
         property.OnValueChange += UpdateUI;
         UpdateUI(property.Value);
     }

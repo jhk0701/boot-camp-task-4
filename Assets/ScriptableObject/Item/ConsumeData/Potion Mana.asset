@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\uB9C8\uB098 \uD3EC\uC158"
   description: "\uB9C8\uB098 \uD3EC\uC158"
-  icon: {fileID: 0}
+  icon: {fileID: 994223573, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
   price: 50
+  canStack: 1
+  maxStackCount: 999
   effects:
   - type: 2
     value: 100

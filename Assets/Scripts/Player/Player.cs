@@ -6,7 +6,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(PlayerLevel))]
 [RequireComponent(typeof(PlayerStatus))]
 [RequireComponent(typeof(PlayerAbility))]
-[RequireComponent(typeof(PlayerProperty))]
 public class Player : MonoBehaviour
 {
     public PlayerData data;
@@ -15,7 +14,6 @@ public class Player : MonoBehaviour
     public PlayerLevel Level { get; private set; }
     public PlayerStatus Status { get; private set; }
     public PlayerAbility Ability { get; private set; }
-    public PlayerProperty Property { get; private set; }
     
     public Enemy Target { get; set; }
     public PlayerStateMachine stateMachine;
@@ -29,7 +27,6 @@ public class Player : MonoBehaviour
         Level = GetComponent<PlayerLevel>();
         Status = GetComponent<PlayerStatus>();
         Ability = GetComponent<PlayerAbility>();
-        Property = GetComponent<PlayerProperty>();
 
         stateMachine = new PlayerStateMachine(this);
     }

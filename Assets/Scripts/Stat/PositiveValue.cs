@@ -1,12 +1,6 @@
 using System;
 
-public enum EProperty
-{
-    Gold, // 기본 화폐
-    Jewelry, // 재화 유형 1 : 강화 재료
-}
-
-public class Property
+public class PositiveValue // 양의 수
 {
     // 재화들은 음수를 가질 수 없으므로 ulong으로 선언
     ulong _value = 0;
@@ -22,7 +16,7 @@ public class Property
     public event Action<ulong> OnValueChange;
 
 
-    public Property(ulong value)
+    public PositiveValue(ulong value)
     {
         Value = value;
     }
