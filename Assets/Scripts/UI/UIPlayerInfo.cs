@@ -18,8 +18,8 @@ public class UIPlayerInfo : MonoBehaviour
     void Start()
     {    
         PlayerLevel playerLevel = CharacterManager.Instance.Player.Level;
-        playerLevel.onLevelChanged += UpdateLevelUI;
-        playerLevel.onExperienceChanged += UpdateExperienceUI;
+        playerLevel.OnLevelChanged += UpdateLevelUI;
+        playerLevel.OnExperienceChanged += UpdateExperienceUI;
 
         UpdateLevelUI(playerLevel.Level);
         UpdateExperienceUI(playerLevel.Experience, playerLevel.RequiredExperience);

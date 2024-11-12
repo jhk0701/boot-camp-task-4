@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class ShoppingSlot : Slot
 {
-    MerchantData merchant;
+    MerchantData merchant; // 데이터받기
 
     public void Initialize(int id, MerchantData dataSet, Action<int> selectedAction)
     {

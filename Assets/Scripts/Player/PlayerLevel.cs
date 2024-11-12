@@ -15,7 +15,7 @@ public class PlayerLevel : MonoBehaviour
                 return;
 
             _level = value;
-            onLevelChanged?.Invoke(_level);
+            OnLevelChanged?.Invoke(_level);
         }
     }
 
@@ -33,14 +33,14 @@ public class PlayerLevel : MonoBehaviour
                 _experience = _experience - _requiredExperience;
             }
             
-            onExperienceChanged?.Invoke(_experience, _requiredExperience);
+            OnExperienceChanged?.Invoke(_experience, _requiredExperience);
         }
     }
     [SerializeField] float _requiredExperience = 100f;
     public float RequiredExperience { get => _requiredExperience; }
 
-    public event Action<int> onLevelChanged;
-    public event Action<float, float> onExperienceChanged;
+    public event Action<int> OnLevelChanged;
+    public event Action<float, float> OnExperienceChanged;
 
 
     public void AddExperience(float amount)

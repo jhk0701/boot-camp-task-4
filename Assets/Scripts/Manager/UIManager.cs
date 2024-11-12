@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManagerStart : Singleton<UIManagerStart>
+
+public class UIManager : Singleton<UIManager>
 {
     public GameObject modal;
 
-    public UIModal inventory;
-    public UIModal shop;
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+    
 
     public void OpenModal(UIModal uiModal)
     {
