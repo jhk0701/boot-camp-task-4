@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public struct StatusConfig
+public struct StatusData
 {
     public EStatus type;
     public float initialValue;
@@ -11,15 +11,15 @@ public struct StatusConfig
 
 
 [Serializable]
-public struct AbilityConfig
+public struct AbilityData
 {
     public EAbility type;
     public float initialValue;
     public float applyingValue; // 힘 n 당 1의 데미지를 얻기 등등으로 사용 예정
 }
 
-[CreateAssetMenu(fileName ="New Player Config", menuName = "New Player Config")]
-public class PlayerConfig : ScriptableObject
+[CreateAssetMenu(fileName ="New Player Data", menuName = "New Player Data")]
+public class PlayerData : ScriptableObject
 {
     [Header("Search State")]
     public float searchCheckRate = 0.2f;
@@ -29,8 +29,8 @@ public class PlayerConfig : ScriptableObject
     public float attackRate = 1f;
 
     [Header("Status")]
-    public StatusConfig[] statusConfigs;
+    public StatusData[] status;
 
     [Header("Ability")]
-    public AbilityConfig[] abilityConfigs;
+    public AbilityData[] ability;
 }

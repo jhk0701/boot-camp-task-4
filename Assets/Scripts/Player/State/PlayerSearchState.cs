@@ -22,7 +22,7 @@ public class PlayerSearchState : PlayerBaseState
     public override void Update()
     {
         base.Update();
-        if (Time.time - lastCheckTime > stateMachine.Player.config.searchCheckRate)
+        if (Time.time - lastCheckTime > stateMachine.Player.data.searchCheckRate)
         {
             lastCheckTime = Time.time;
 

@@ -10,12 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf99203e746012f4390cdca93f90ab1c, type: 3}
-  m_Name: Player Default Config
+  m_Name: Player Default Data
   m_EditorClassIdentifier: 
   searchCheckRate: 0.2
   attackRange: 3
   attackRate: 1
-  abilityConfigs:
+  status:
+  - type: 0
+    initialValue: 100
+    maximumValue: 100
+  - type: 1
+    initialValue: 100
+    maximumValue: 100
+  - type: 2
+    initialValue: 100
+    maximumValue: 100
+  ability:
   - type: 0
     initialValue: 10
     applyingValue: 1
@@ -25,13 +35,3 @@ MonoBehaviour:
   - type: 2
     initialValue: 5
     applyingValue: 1
-  statusConfigs:
-  - type: 0
-    initialValue: 100
-    maximumValue: 100
-  - type: 1
-    initialValue: 100
-    maximumValue: 100
-  - type: 2
-    initialValue: 100
-    maximumValue: 100

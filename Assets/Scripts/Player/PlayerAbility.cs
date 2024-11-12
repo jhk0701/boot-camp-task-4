@@ -26,10 +26,10 @@ public class PlayerAbility : MonoBehaviour
     {
         // TODO : 데이터 받아올 것
         Player player = GetComponent<Player>();
-        foreach (AbilityConfig config in player.config.abilityConfigs)
+        foreach (AbilityData data in player.data.ability)
         {
-            ability.Add(config.type, new PassiveStat(config.initialValue, 0f));
-            applying.Add(config.type, config.applyingValue);
+            ability.Add(data.type, new PassiveStat(data.initialValue, 0f));
+            applying.Add(data.type, data.applyingValue);
         }
     }
 

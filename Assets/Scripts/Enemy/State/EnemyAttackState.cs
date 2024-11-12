@@ -67,14 +67,16 @@ public class EnemyAttackState : EnemyBaseState
     {
         Enemy enemy = stateMachine.Enemy;
         if (Time.time - lastAttackTime > enemy.data.attackRate)
-        {
+        {    
             lastAttackTime = Time.time;
+
+            enemy.Agent.isStopped = true;
+            enemy.Agent.speed = 0;
 
             if(enemy.Target.TryGetComponent(out IDamagable damagable))
             {
                 if (damagable.IsDead)
                 {
-                    Debug.Log("Target is dead");
                     stateMachine.ChangeState(stateMachine.IdleState);
                     return;
                 }

@@ -29,7 +29,7 @@ public class PlayerAttackState : PlayerBaseState
             return;
         }
 
-        if (Time.time - lastAttackRate > stateMachine.Player.config.attackRate)
+        if (Time.time - lastAttackRate > stateMachine.Player.data.attackRate)
         {
             lastAttackRate = Time.time;
             Attack();
