@@ -11,7 +11,7 @@ public class UIInventory : UIModal
         for (int i = 0; i < slotContainer.childCount; i++)
         {
             slots[i] = slotContainer.GetChild(i).GetComponent<ItemSlot>();
-            slots[i].Initialize(i, (index)=>{});
+            slots[i].Initialize(i, SelectSlot);
 
             slots[i].Set();
         }
@@ -30,5 +30,8 @@ public class UIInventory : UIModal
         }
     }
 
+    void SelectSlot(int id)
+    {
 
+    }
 }

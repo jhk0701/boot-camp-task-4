@@ -6,7 +6,6 @@ public class ItemSlot : Slot
 
     public override void Initialize(int id, Action<int> selectedAction)
     {
-        // 음... 더 좋은 방법이 필요할 거 같음
         inventory = DataManager.Instance.Inventory;
 
         base.Initialize(id, selectedAction);
