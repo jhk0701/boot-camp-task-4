@@ -30,12 +30,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        ProceduralGenerator map = GameManager.Instance.mapGenerator;
-        Transform block = map.blockQueue.Dequeue();
-        map.blockQueue.Enqueue(block);
-        Agent.Warp(block.position);
-        
-        stateMachine.ChangeState(stateMachine.IdleState);
+        Initialize();
     }
     
     void Update()
@@ -46,6 +41,17 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         stateMachine.StateFixedUpdate();
+    }
+
+    
+    void Initialize()
+    {
+        ProceduralGenerator map = GameManager.Instance.mapGenerator;
+        Transform block = map.blockQueue.Dequeue();
+        map.blockQueue.Enqueue(block);
+        Agent.Warp(block.position);
+        
+        stateMachine.ChangeState(stateMachine.IdleState);
     }
     
 }

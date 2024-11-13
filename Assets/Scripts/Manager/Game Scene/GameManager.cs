@@ -34,4 +34,9 @@ public class GameManager : Singleton<GameManager>
 
         UIManagerGame.Instance.Initialize();
     }
+
+    public void StageEnd(bool playerIsWin)
+    {
+        UIManagerGame.Instance.OpenClearUI(playerIsWin);
+    }
 }

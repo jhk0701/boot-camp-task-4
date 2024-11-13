@@ -5,6 +5,11 @@ using UnityEngine;
 using System.IO;
 using CustomData;
 
+[RequireComponent(typeof(Level))]
+[RequireComponent(typeof(Ability))]
+[RequireComponent(typeof(Property))]
+[RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(Equipment))]
 public class DataManager : Singleton<DataManager>
 {
     string savePath;

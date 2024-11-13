@@ -7,10 +7,10 @@ namespace CustomData
     {
         // 리소스 로드용 경로들
         public const string PATH_PLAYER_PREFAB = "Prefabs/Player";
-        public const string PATH_ENEMY = "Prefabs/Enemies/";
 
         public const string PATH_IN_GAME_CANVAS = "Prefabs/UI/In Game Canvas";
         public const string PATH_UI_REGISTER = "Prefabs/UI/UI Register";
+        public const string PATH_UI_STAGE_CLEAR = "Prefabs/UI/UI Stage Clear";
 
         // 씬 이름
         public const string SCENE_START = "StartScene";

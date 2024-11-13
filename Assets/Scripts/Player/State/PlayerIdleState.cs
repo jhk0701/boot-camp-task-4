@@ -26,6 +26,7 @@ public class PlayerIdleState : PlayerBaseState
         {
             Debug.Log("적이 없음");
             // 스테이지 종료
+            GameManager.Instance.StageEnd(true);
         }
     }
 }

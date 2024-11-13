@@ -1013,11 +1013,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialData:
   - type: 0
-    initialValue: 10
+    initialValue: 20
     applyingValue: 1
   - type: 1
     initialValue: 10
-    applyingValue: 1
+    applyingValue: 5
   - type: 2
     initialValue: 10
     applyingValue: 1
