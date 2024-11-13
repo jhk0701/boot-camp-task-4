@@ -28,4 +28,18 @@ public class Property : MonoBehaviour
         properties.Add(EProperty.Gold,      new PositiveValue(0));
         properties.Add(EProperty.Jewelry,   new PositiveValue(0));
     }
+
+    public void Earn(EProperty type, ulong amount)
+    {
+        properties[type].Add(amount);
+    }
+    
+    public bool Pay(EProperty type, ulong amount)
+    {
+        if (properties[type].Value < amount) 
+            return false;
+        
+        properties[type].Subtract(amount);
+        return true;
+    }
 }

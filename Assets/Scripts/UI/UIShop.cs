@@ -23,6 +23,7 @@ public class UIShop : UIModal
     [SerializeField] GameObject buyButton;
     [SerializeField] GameObject sellButton;
 
+    bool isBuying = false;
     int selectedIndex = -1;
 
     void Start()
@@ -32,6 +33,8 @@ public class UIShop : UIModal
         {
             playerGoldText.text = string.Concat("보유 골드 :\n", gold.ToString(), " G");
         };
+        ulong gold = DataManager.Instance.Property.properties[EProperty.Gold].Value;
+        playerGoldText.text = string.Concat("보유 골드 :\n", gold.ToString(), " G");
     }
 
     public override void Initialize()
@@ -84,17 +87,18 @@ public class UIShop : UIModal
     {
         itemNameText.text = data.itemName;
         itemEffectText.text = data.GetItemInfo();
+        isBuying = isBuy;
 
         if(isBuy)
         {
-            itemPriceText.text = string.Concat("구매 가격: ", data.price, " G");
+            itemPriceText.text = string.Concat("구매 가격: ", data.price.ToString(), " G");
 
             buyButton.SetActive(true);
             sellButton.SetActive(false);
         }
         else
         {
-            itemPriceText.text = string.Concat("판매 가격: ", data.price, " G");
+            itemPriceText.text = string.Concat("판매 가격: ", data.price.ToString(), " G");
 
             buyButton.SetActive(false);
             sellButton.SetActive(true);
@@ -108,13 +112,50 @@ public class UIShop : UIModal
         itemPriceText.text = string.Empty;
     }
 
+    void UpdateUI()
+    {
+        for (int i = 0; i < merchantSlot.Length; i++)
+        {
+            merchantSlot[i].Set();
+        }
+        
+        for (int i = 0; i < playerSlot.Length; i++)
+        {
+            playerSlot[i].Set();
+        }
+    }
+    
     public void OnClickBuy()
     {
-
+        if(!isBuying) 
+            return;
+        ItemData item = merchant.itemsOnSale[selectedIndex];
+        // 지불
+        if (DataManager.Instance.Property.Pay(EProperty.Gold, item.price))
+        {
+            // 인벤토리에 추가
+            DataManager.Instance.Inventory.AddItem(item);
+            // 상인은 물건이 사라지지 않음
+            UpdateUI();
+        }
     }
 
     public void OnClickSell()
     {
+        if(isBuying) 
+            return;
+        
+        ItemData item = DataManager.Instance.Inventory.items[selectedIndex].data;
+        
+        if(item == null) 
+            return;
+        
+        // 대금
+        DataManager.Instance.Property.Earn(EProperty.Gold, item.price);
 
+        // 인벤토리에서 제거
+        DataManager.Instance.Inventory.RemoveItem(selectedIndex);
+        // 상인은 물건이 추가되지 않음
+        UpdateUI();
     }
 }
