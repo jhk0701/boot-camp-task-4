@@ -9,29 +9,29 @@ public class RangedStat : Stat
         get => base.Value; 
         protected set 
         {
-            base.Value = value; 
-            CallOnValueChangeEvent(Value, Max);
+            baseValue = value; 
+            CallOnValueChangeEvent(Value, max);
         }
     }
 
-    [field:SerializeField] public float Max { get; private set; }
-    public float Min { get; private set; } = 0f;
+    [SerializeField] public float max;
+    [SerializeField] public float min;
 
     public RangedStat(float initValue, float maxValue)
     {
         Value = initValue;
-        Max = maxValue;
+        max = maxValue;
     }
 
 
     public override void Add(float amount)
     {
-        Value = Mathf.Min(Value + amount, Max);
+        Value = Mathf.Min(Value + amount, max);
     }
 
     public override void Subtract(float amount)
     {
-        Value = Mathf.Max(Value - amount, Min);
+        Value = Mathf.Max(Value - amount, min);
     }
 
     

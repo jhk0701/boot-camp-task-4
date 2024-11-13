@@ -10,18 +10,23 @@ public class Item
 
 public class Inventory : MonoBehaviour
 {
-    const int MAX_SIZE = 49;
-    public Item[] items = new Item[MAX_SIZE];
+    public Item[] items = new Item[CustomData.Constants.INVENTORY_MAX_SIZE];
     public event Action<int> OnChanged;
 
-
-    void Awake()
+    private void Start()
     {
-        // items = new Item[MAX_SIZE];
-        // for (int i = 0; i < MAX_SIZE; i++)
-        // {
-        //     items[i] = new Item();
-        // }
+        DataManager.Instance.OnSave += Save;
+        DataManager.Instance.OnLoadComplete += Initialize;
+    }
+
+    public void Initialize()
+    {
+        items = DataManager.Instance.PlayerInventory.inventory;
+    }
+
+    void Save()
+    {
+        DataManager.Instance.PlayerInventory.inventory = items;
     }
 
     public void AddItem(ItemData data)

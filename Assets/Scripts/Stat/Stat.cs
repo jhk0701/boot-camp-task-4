@@ -4,8 +4,12 @@ using UnityEngine;
 [Serializable]
 public abstract class Stat
 {
-    [SerializeField] float _value;
-    public virtual float Value { get; protected set; }
+    public float baseValue;
+    public virtual float Value
+    {
+        get => baseValue; 
+        protected set => baseValue = value;
+    }
 
     public event Action<float, float> OnValueChange;
 

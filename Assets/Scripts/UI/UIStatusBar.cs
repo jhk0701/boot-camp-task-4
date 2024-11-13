@@ -10,10 +10,10 @@ public class UIStatusBar : MonoBehaviour
     
     void Start()
     {
-        RangedStat stat = CharacterManager.Instance.Player.Status.status[target] as RangedStat;
+        RangedStat stat = CharacterManager.Instance.Player.Status.data.status[target] as RangedStat;
     
         stat.OnValueChange += UpdateUI;
-        UpdateUI(stat.Value, stat.Max);
+        UpdateUI(stat.Value, stat.max);
     }
 
     void UpdateUI(float current, float max)

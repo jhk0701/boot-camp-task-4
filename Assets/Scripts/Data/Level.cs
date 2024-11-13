@@ -1,12 +1,10 @@
 using System;
 using UnityEngine;
 
-// TODO : 플레이어 정보 세이브 & 로드 대상
-public class PlayerLevel : MonoBehaviour
+public class Level : MonoBehaviour
 {
-    [Header("Player Level")]
     [SerializeField] int level = 1;
-    public int Level
+    public int LevelValue
     {
         get => level;
         private set
@@ -29,7 +27,7 @@ public class PlayerLevel : MonoBehaviour
 
             if (experience >= requiredExperience)
             {
-                Level++;
+                LevelValue++;
                 experience = experience - requiredExperience;
             }
             

@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: "\uC0D8\uD50C \uC2A4\uD14C\uC774\uC9C0"
   enemyGroup:
-  - enemies: []
-  - enemies: []
-  - enemies: []
+  - enemies:
+    - {fileID: 2031672316668478592, guid: 04d94fd819778bc499bc6dfcbda59d38, type: 3}
+  - enemies:
+    - {fileID: 2031672316668478592, guid: 04d94fd819778bc499bc6dfcbda59d38, type: 3}
+  - enemies:
+    - {fileID: 2031672316668478592, guid: 04d94fd819778bc499bc6dfcbda59d38, type: 3}
   reward:
     exp: 100
     gold: 1000

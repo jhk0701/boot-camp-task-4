@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -42,6 +43,12 @@ public class UIInventory : UIModal
     public override void Initialize()
     {
         UpdateUI();
+    }
+
+    private void OnDisable()
+    {
+        DataManager.Instance.SaveData(DataManager.Instance.PlayerInventory);
+        
     }
 
     void UpdateUI()

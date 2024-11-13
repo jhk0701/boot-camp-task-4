@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,12 @@ public class SceneLoader : Singleton<SceneLoader>
         DontDestroyOnLoad(gameObject);
     }
 
+    public event Action<string> OnLoadScene;
+    
     void LoadScene(string scene)
     {
         SceneManager.LoadScene(scene);
+        OnLoadScene?.Invoke(scene);
     }
     
     public void LoadMenuScene()

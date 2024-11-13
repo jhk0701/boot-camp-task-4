@@ -16,7 +16,18 @@ public class CharacterManager : Singleton<CharacterManager>
         return Instantiate(player);
     }
 
-    // TODO 최적화 필요
+    public void SpawnEnemy(Stage data)
+    {
+        for (int i = 0; i < data.enemyGroup.Length; i++)
+        {
+            foreach (var enemy in data.enemyGroup[i].enemies)
+            {
+                Instantiate(enemy);
+            }
+        }
+    }
+
+    // TODO : 최적화 필요
     public Enemy GetNearestEnemy()
     {
         var alives = enemies.Where(n=>!n.Status.IsDead);

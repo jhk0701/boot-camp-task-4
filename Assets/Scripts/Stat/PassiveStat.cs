@@ -7,31 +7,31 @@ public class PassiveStat : Stat
 {
     public override float Value 
     { 
-        get => base.Value + PassiveValue; 
+        get => base.Value + passiveValue; 
         protected set 
         {
-            base.Value = value;
-            CallOnValueChangeEvent(Value, PassiveValue); // 현재값 (+추가값) 형태로 사용
+            baseValue = value;
+            CallOnValueChangeEvent(Value, passiveValue); // 현재값 (+추가값) 형태로 사용
         } 
     }
-    
-    public float PassiveValue { get; private set; }
+
+    public float passiveValue;
 
 
     public PassiveStat(float initValue, float initPassive)
     {
         Value = initValue;
-        PassiveValue = initPassive;
+        passiveValue = initPassive;
     }
     
 
     public override void Add(float amount)
     {
-        PassiveValue += amount;
+        passiveValue += amount;
     }
 
     public override void Subtract(float amount)
     {
-        PassiveValue = Mathf.Max(PassiveValue - amount, 0f);
+        passiveValue = Mathf.Max(passiveValue - amount, 0f);
     }
 }

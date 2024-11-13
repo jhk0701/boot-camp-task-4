@@ -20,7 +20,6 @@ public class Enemy : MonoBehaviour
         set 
         {
             _target = value;
-            Debug.Log("OnTargetDetected");
             OnTargetDetected?.Invoke();
         } 
     }
@@ -35,6 +34,15 @@ public class Enemy : MonoBehaviour
         Status = GetComponent<EnemyStatus>();
 
         stateMachine = new EnemyStateMachine(this);
+    }
+
+    private void Start()
+    {
+        Status.OnDead += () =>
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+            Destroy(gameObject);
+        };
     }
 
     void Update()

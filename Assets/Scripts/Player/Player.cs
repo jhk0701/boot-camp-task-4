@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(PlayerLevel))]
 [RequireComponent(typeof(PlayerStatus))]
 [RequireComponent(typeof(PlayerAbility))]
 public class Player : MonoBehaviour
@@ -11,7 +10,6 @@ public class Player : MonoBehaviour
     public CharacterData data;
 
     public NavMeshAgent Agent { get; private set; }
-    public PlayerLevel Level { get; private set; }
     public PlayerStatus Status { get; private set; }
     public PlayerAbility Ability { get; private set; }
     
@@ -24,7 +22,6 @@ public class Player : MonoBehaviour
         CharacterManager.Instance.Player = this;
 
         Agent = GetComponent<NavMeshAgent>();
-        Level = GetComponent<PlayerLevel>();
         Status = GetComponent<PlayerStatus>();
         Ability = GetComponent<PlayerAbility>();
 

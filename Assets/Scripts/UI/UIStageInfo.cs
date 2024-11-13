@@ -7,7 +7,7 @@ public class UIStageInfo : MonoBehaviour
 
     void Start()
     {
-        text.text = GameManager.Instance.currentStage.GetInformation();
+        text.text = GameManager.Instance.CurrentStage.GetInformation();
     }
     
 }

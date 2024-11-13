@@ -16,6 +16,9 @@ namespace CustomData
         public const string SCENE_START = "StartScene";
         public const string SCENE_MENU = "MenuScene";
         public const string SCENE_GAME = "GameScene";
+        
+        // 인벤토리
+        public const int INVENTORY_MAX_SIZE = 49;
     }
 
     [Serializable]
@@ -27,5 +30,12 @@ namespace CustomData
 
         // TODO : 아이템 보상
         public ItemData[] items;
+    }
+
+    [Serializable]
+    public class JsonDictionary<TKey, TValue>
+    {
+        public TKey key;
+        public TValue value;
     }
 }

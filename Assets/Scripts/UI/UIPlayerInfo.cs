@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,17 +13,24 @@ public class UIPlayerInfo : MonoBehaviour
     [SerializeField] TextMeshProUGUI experienceText;
     [SerializeField] Image experienceBar;
     
-    // TODO : 유저 이름 정보 받아올 것
     string playerName = "Player";
 
     void Start()
-    {    
-        PlayerLevel playerLevel = CharacterManager.Instance.Player.Level;
+    {
+        playerName = DataManager.Instance.PlayerData.playerName;
+        Level playerLevel = DataManager.Instance.Level;
         playerLevel.OnLevelChanged += UpdateLevelUI;
         playerLevel.OnExperienceChanged += UpdateExperienceUI;
 
-        UpdateLevelUI(playerLevel.Level);
+        UpdateLevelUI(playerLevel.LevelValue);
         UpdateExperienceUI(playerLevel.Experience, playerLevel.RequiredExperience);
+    }
+
+    private void OnDisable()
+    {
+        Level playerLevel = DataManager.Instance.Level;
+        playerLevel.OnLevelChanged -= UpdateLevelUI;
+        playerLevel.OnExperienceChanged -= UpdateExperienceUI;
     }
 
     void UpdateLevelUI(int level)

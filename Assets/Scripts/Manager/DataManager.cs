@@ -1,21 +1,27 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using CustomData;
 
-[RequireComponent(typeof(Property))]
-[RequireComponent(typeof(Inventory))]
-[RequireComponent(typeof(Equipment))]
 public class DataManager : Singleton<DataManager>
 {
     string savePath;
 
-    public Inventory Inventory { get; private set; }
+    public Level Level { get; private set; }
+    public Ability Ability { get; private set; }
+    public Status Status { get; private set; }
     public Property Property { get; private set; }
+    public Inventory Inventory { get; private set; }
     public Equipment Equipment { get; private set; }
 
+    public bool IsFirstAccess { get; private set; }
     public PlayerData PlayerData { get; private set; }
-    public event Action OnLoadComplete; 
+    public PlayerInventory PlayerInventory { get; private set; }
+    
+    public event Action OnLoadComplete;
+    public event Action OnSave;
 
     void Awake()
     {
@@ -23,39 +29,41 @@ public class DataManager : Singleton<DataManager>
         
         // TODO : DB에 저장하기
         savePath = Application.persistentDataPath; // 테스트용 로컬 저장
-
-        Inventory = GetComponent<Inventory>();
+        
+        Level = GetComponent<Level>();
+        Ability = GetComponent<Ability>();
+        Status = GetComponent<Status>();
         Property = GetComponent<Property>();
+        
+        Inventory = GetComponent<Inventory>();
         Equipment = GetComponent<Equipment>();
     }
 
     private void Start()
     {
-        LoadPlayerData();
+        LoadData();
+        SceneLoader.Instance.OnLoadScene += (name) => { SaveData(); };
     }
 
-    void LoadPlayerData()
+    void LoadData()
     {
-        if (handler != null)
-        {
-            StopCoroutine(handler);
-            handler = null;
-        }
-
-        handler = StartCoroutine(LoadPlayerDataRoutine(ProcessLoadResult));
+        StartCoroutine(LoadDataRoutine(ProcessLoadResult));
     }
 
-    Coroutine handler;
-    IEnumerator LoadPlayerDataRoutine(Action<bool> callback = null)
+    IEnumerator LoadDataRoutine(Action<bool> callback = null)
     {
+        // TODO : 더 좋은 방법 찾아볼 것
+        // 매니저들이 서로 간의 이벤트 구독을 마친 시점
+        yield return null;
+        
         try
         {
             PlayerData = LoadData<PlayerData>();
-            PlayerData.isFirst = false;
+            PlayerInventory = LoadData<PlayerInventory>();
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            // Debug.LogError(e.Message);
             callback?.Invoke(false);
             yield break;
         }
@@ -65,12 +73,12 @@ public class DataManager : Singleton<DataManager>
 
     void ProcessLoadResult(bool isSuccess)
     {
+        IsFirstAccess = !isSuccess;
         if (isSuccess)
         {
-            // 게임 시작
             OnLoadComplete?.Invoke();
+            // 게임 시작
             SceneLoader.Instance.LoadMenuScene();
-            //로드한 데이터 뿌려주기
         }
         else
         {   
@@ -83,20 +91,51 @@ public class DataManager : Singleton<DataManager>
     public void CreateNewPlayerData(string name)
     {
         PlayerData = new PlayerData();
-        PlayerData.isFirst = true;
         PlayerData.playerName = name;
 
         PlayerData.level = 1;
         PlayerData.experience = 0f;
+
+        PlayerData.status = new List<JsonDictionary<EStatus, RangedStat>>();
+        PlayerData.ability = new List<JsonDictionary<EAbility, PassiveStat>>();
+        PlayerData.property = new List<JsonDictionary<EProperty, PositiveValue>>();
+
+        PlayerInventory = new PlayerInventory();
+        PlayerInventory.inventory = new Item[CustomData.Constants.INVENTORY_MAX_SIZE];
+        PlayerInventory.equipment = new List<JsonDictionary<EEquipment, EquipableItemData>>();
         
-        PlayerData.gold = 1000;
-        PlayerData.jewelry = 500;
+        OnLoadComplete?.Invoke();
+
+        SaveData();
+    }
+
+    [ContextMenu("Save")]
+    public void SaveData()
+    {
+        if (saveRoutineHandler != null)
+        {
+            StopCoroutine(saveRoutineHandler);
+        }
+        
+        saveRoutineHandler = StartCoroutine(SaveDataRoutine());
     }
     
+    Coroutine saveRoutineHandler;
+    IEnumerator SaveDataRoutine()
+    {
+        OnSave?.Invoke();
+        
+        yield return null;
+        
+        SaveData(PlayerData);
+        SaveData(PlayerInventory);
+
+        saveRoutineHandler = null;
+    }
     
     public void SaveData<T>(T data)
     {
-        string json = JsonUtility.ToJson(data);
+        string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(savePath + $"/{typeof(T).ToString()}.txt", json);
     }
 
