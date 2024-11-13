@@ -18,11 +18,16 @@ public class CharacterManager : Singleton<CharacterManager>
 
     public void SpawnEnemy(Stage data)
     {
+        ProceduralGenerator map = GameManager.Instance.mapGenerator;
+        
         for (int i = 0; i < data.enemyGroup.Length; i++)
         {
+            Transform block = map.blockQueue.Dequeue();
+            map.blockQueue.Enqueue(block);
+            
             foreach (var enemy in data.enemyGroup[i].enemies)
             {
-                Instantiate(enemy);
+                Instantiate(enemy, block.position, Quaternion.identity);
             }
         }
     }

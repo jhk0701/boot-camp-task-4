@@ -30,6 +30,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        ProceduralGenerator map = GameManager.Instance.mapGenerator;
+        Transform block = map.blockQueue.Dequeue();
+        map.blockQueue.Enqueue(block);
+        Agent.Warp(block.position);
+        
         stateMachine.ChangeState(stateMachine.IdleState);
     }
     
