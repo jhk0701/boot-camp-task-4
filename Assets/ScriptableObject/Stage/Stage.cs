@@ -2,7 +2,11 @@ using System;
 using UnityEngine;
 using CustomData;
 
-
+[Serializable]
+public class EnemyGroup
+{
+    public Enemy[] enemies;
+}
 
 [CreateAssetMenu(fileName ="New Stage", menuName = "New Stage")]
 public class Stage : ScriptableObject
@@ -18,11 +22,5 @@ public class Stage : ScriptableObject
     public string GetInformation()
     {
         return mapName;
-    }
-    
-    [Serializable]
-    public class EnemyGroup
-    {
-        public Enemy[] enemies;
     }
 }

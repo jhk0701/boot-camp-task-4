@@ -16,7 +16,8 @@ public class DataManager : Singleton<DataManager>
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        savePath = Application.persistentDataPath;
+        // TODO : DB에 저장하기
+        savePath = Application.streamingAssetsPath; // 테스트용 로컬 저장
 
         Inventory = GetComponent<Inventory>();
         Property = GetComponent<Property>();

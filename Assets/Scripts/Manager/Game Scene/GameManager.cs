@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator InitializeSequence()
     {
         // TODO : 로딩창 만들 것
+        currentStage = StageManager.Instance.stages[StageManager.Instance.selectedStageId];
 
         yield return null;
 

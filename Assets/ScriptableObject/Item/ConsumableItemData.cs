@@ -2,23 +2,10 @@ using System;
 using System.Text;
 using UnityEngine;
 
-[Serializable]
-public class ConsumeEffect
-{
-    public EStatus type;
-    public float value;
-
-    public void Use()
-    {
-        Debug.Log("Use called");
-        //CharacterManager.Instance.Player.Status.RecoverStatus(type, value);
-    }
-}
 
 [CreateAssetMenu(fileName ="New Consume", menuName = "New Consume")]
 public class ConsumableItemData : ItemData
 {
-
     public bool canStack = true;
     public int maxStackCount = 999;
     
@@ -30,7 +17,7 @@ public class ConsumableItemData : ItemData
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < effects.Length; i++)
         {
-            sb.Append($"{effects[i].type} : {effects[i].value}\n");
+            sb.Append($"{effects[i].GetEffectInfo()}\n");
         }
 
         return sb.ToString();

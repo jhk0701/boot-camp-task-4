@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1012537975fc8e540a7e88f72ac037ef, type: 3}
-  m_Name: Potion Health
+  m_Name: Scroll Strength
   m_EditorClassIdentifier: 
-  itemName: "\uCCB4\uB825 \uD3EC\uC158"
-  description: "\uCCB4\uB825 \uD3EC\uC158"
-  icon: {fileID: 994223573, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
-  price: 50
+  itemName: "\uAD34\uB825\uC758 \uC2A4\uD06C\uB864"
+  description: "\uC77C\uC2DC\uC801\uC73C\uB85C \uD798\uC744 \uC99D\uAC00\uC2DC\uD0A8\uB2E4."
+  icon: {fileID: 1870898176, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
+  price: 10
   canStack: 1
   maxStackCount: 999
   effects:
-  - {fileID: 11400000, guid: b7524877d1000154d97adf8fc8251dcd, type: 2}
+  - {fileID: 11400000, guid: bb892bbefa989664aa4aaff76f3f6553, type: 2}

@@ -21,7 +21,6 @@ public class EquipEffect
 [CreateAssetMenu(fileName ="New Equipment", menuName = "New Equipment")]
 public class EquipableItemData : ItemData
 {
-    
     [Header("Equipable Item")]
     public EEquipment type;
     public EquipEffect[] effects;

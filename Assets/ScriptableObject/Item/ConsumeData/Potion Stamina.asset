@@ -19,5 +19,4 @@ MonoBehaviour:
   canStack: 1
   maxStackCount: 999
   effects:
-  - type: 1
-    value: 100
+  - {fileID: 11400000, guid: 0fd2df44335d1b34396af846799d2be0, type: 2}

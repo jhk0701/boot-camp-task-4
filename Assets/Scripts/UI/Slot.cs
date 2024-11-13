@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
+// TODO : 제너릭으로 더 일반화 가능한지 확인해보기 
 public abstract class Slot : MonoBehaviour
 {
     public int index;
