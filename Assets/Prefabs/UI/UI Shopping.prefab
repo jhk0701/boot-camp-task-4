@@ -1870,7 +1870,7 @@ GameObject:
   - component: {fileID: 7828040680468052539}
   - component: {fileID: 314991177805270498}
   m_Layer: 5
-  m_Name: UI Panel Shopping
+  m_Name: UI Shopping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -129,6 +129,7 @@ public class UIShop : UIModal
     {
         if(!isBuying) 
             return;
+        
         ItemData item = merchant.itemsOnSale[selectedIndex];
         // 지불
         if (DataManager.Instance.Property.Pay(EProperty.Gold, item.price))

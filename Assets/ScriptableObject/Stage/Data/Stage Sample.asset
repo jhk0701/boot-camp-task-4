@@ -12,4 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ad64f7847003e43a6a7a856a8d329f, type: 3}
   m_Name: Stage Sample
   m_EditorClassIdentifier: 
-  mapId: 0
+  mapName: "\uC0D8\uD50C \uC2A4\uD14C\uC774\uC9C0"
+  enemyGroup:
+  - enemies: []
+  - enemies: []
+  - enemies: []
+  reward:
+    exp: 100
+    gold: 1000
+    jewelry: 50
+    items:
+    - {fileID: 11400000, guid: 021311a22262677419a640b0f01d029a, type: 2}
+    - {fileID: 11400000, guid: dd019f65a714e4240a6d3e82e870b758, type: 2}

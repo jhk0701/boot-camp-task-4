@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
+    
+    
     void Awake()
     {
         DontDestroyOnLoad(gameObject);

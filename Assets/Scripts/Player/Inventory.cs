@@ -12,8 +12,6 @@ public class Inventory : MonoBehaviour
 {
     const int MAX_SIZE = 49;
     public Item[] items = new Item[MAX_SIZE];
-
-    
     public event Action<int> OnChanged;
 
 

@@ -25,8 +25,8 @@ public class Property : MonoBehaviour
     public void Initiailze()
     {
         // TODO : 데이터 받아올 것
-        properties.Add(EProperty.Gold,      new PositiveValue(0));
-        properties.Add(EProperty.Jewelry,   new PositiveValue(0));
+        properties.Add(EProperty.Gold,      new PositiveValue(1000));
+        properties.Add(EProperty.Jewelry,   new PositiveValue(500));
     }
 
     public void Earn(EProperty type, ulong amount)
