@@ -41,9 +41,9 @@ public class PlayerStatus : MonoBehaviour, IDamagable
     {
         // TODO : 데이터 받아올 것
         Player player = GetComponent<Player>();
-        foreach (StatusData config in player.data.status)
+        foreach (StatusData data in player.data.status)
         {
-            status.Add(config.type, new RangedStat(config.initialValue, config.maximumValue));  
+            status.Add(data.type, new RangedStat(data.initialValue, data.maximumValue));  
         }
     }
 

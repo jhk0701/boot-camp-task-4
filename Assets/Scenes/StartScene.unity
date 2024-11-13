@@ -1686,6 +1686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stages:
   - {fileID: 11400000, guid: fe7e06fea8c3cca4a93a9dba7e7aac91, type: 2}
+  selectedStageId: 0
 --- !u!224 &1324600882 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7828040680468052539, guid: 846767b55bd6709418403975c150edbb,
