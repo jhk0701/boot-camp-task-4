@@ -5,15 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
-    
-    
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadScene(string scene)
+    void LoadScene(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+    
+    public void LoadMenuScene()
+    {
+        LoadScene(CustomData.Constants.SCENE_MENU);
+    }
+    public void LoadGameScene()
+    {
+        LoadScene(CustomData.Constants.SCENE_GAME);
     }
 }

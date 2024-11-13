@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    public GameObject modal;
+    [SerializeField] GameObject commonCanvas;
+    [SerializeField] GameObject modalCanvas;
+
+    public UILoading UILoading { get; set; }
+    
 
     void Awake()
     {
@@ -15,16 +19,16 @@ public class UIManager : Singleton<UIManager>
 
     public void OpenModal(UIModal uiModal)
     {
-        if (modal.activeInHierarchy)
+        if (modalCanvas.activeInHierarchy)
             return;
 
-        modal.SetActive(true);
+        modalCanvas.SetActive(true);
         uiModal.Open();
     }
 
     public void CloseModal(UIModal uiModal)
     {
-        modal.SetActive(false);
+        modalCanvas.SetActive(false);
         uiModal.Close();
     }
 }

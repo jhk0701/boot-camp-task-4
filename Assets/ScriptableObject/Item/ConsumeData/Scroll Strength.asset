@@ -20,3 +20,4 @@ MonoBehaviour:
   maxStackCount: 999
   effects:
   - {fileID: 11400000, guid: bb892bbefa989664aa4aaff76f3f6553, type: 2}
+  - {fileID: 11400000, guid: dbead938327d2cd42b1a86e55b1682b6, type: 2}

@@ -8,7 +8,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(PlayerAbility))]
 public class Player : MonoBehaviour
 {
-    public PlayerData data;
+    public CharacterData data;
 
     public NavMeshAgent Agent { get; private set; }
     public PlayerLevel Level { get; private set; }

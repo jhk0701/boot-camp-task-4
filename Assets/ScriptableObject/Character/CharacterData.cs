@@ -18,8 +18,8 @@ public struct AbilityData
     public float applyingValue; // 힘 n 당 1의 데미지를 얻기 등등으로 사용 예정
 }
 
-[CreateAssetMenu(fileName ="New Player Data", menuName = "New Player Data")]
-public class PlayerData : ScriptableObject
+[CreateAssetMenu(fileName ="New Character Data", menuName = "New Character Data")]
+public class CharacterData : ScriptableObject
 {
     [Header("Search State")]
     public float searchCheckRate = 0.2f;

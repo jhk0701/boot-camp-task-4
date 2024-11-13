@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 258260bb9fee42e0bb3dd90b09885025, type: 3}
-  m_Name: Recover Stamina Effect
+  m_Name: Health Effect
   m_EditorClassIdentifier: 
   value: 100
-  type: 1
+  type: 0

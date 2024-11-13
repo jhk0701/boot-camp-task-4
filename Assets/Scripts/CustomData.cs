@@ -10,9 +10,11 @@ namespace CustomData
         public const string PATH_ENEMY = "Prefabs/Enemies/";
 
         public const string PATH_IN_GAME_CANVAS = "Prefabs/UI/In Game Canvas";
+        public const string PATH_UI_REGISTER = "Prefabs/UI/UI Register";
 
         // 씬 이름
         public const string SCENE_START = "StartScene";
+        public const string SCENE_MENU = "MenuScene";
         public const string SCENE_GAME = "GameScene";
     }
 

@@ -5,39 +5,39 @@ using UnityEngine;
 public class PlayerLevel : MonoBehaviour
 {
     [Header("Player Level")]
-    [SerializeField] int _level = 1;
+    [SerializeField] int level = 1;
     public int Level
     {
-        get => _level;
+        get => level;
         private set
         {
-            if(value <= _level) 
+            if(value <= level) 
                 return;
 
-            _level = value;
-            OnLevelChanged?.Invoke(_level);
+            level = value;
+            OnLevelChanged?.Invoke(level);
         }
     }
 
-    [SerializeField] float _experience = 0f;
+    [SerializeField] float experience = 0f;
     public float Experience 
     { 
-        get => _experience;
+        get => experience;
         private set
         {
-            _experience = value;
+            experience = value;
 
-            if (_experience >= _requiredExperience)
+            if (experience >= requiredExperience)
             {
                 Level++;
-                _experience = _experience - _requiredExperience;
+                experience = experience - requiredExperience;
             }
             
-            OnExperienceChanged?.Invoke(_experience, _requiredExperience);
+            OnExperienceChanged?.Invoke(experience, requiredExperience);
         }
     }
-    [SerializeField] float _requiredExperience = 100f;
-    public float RequiredExperience { get => _requiredExperience; }
+    [SerializeField] float requiredExperience = 100f;
+    public float RequiredExperience { get => requiredExperience; }
 
     public event Action<int> OnLevelChanged;
     public event Action<float, float> OnExperienceChanged;

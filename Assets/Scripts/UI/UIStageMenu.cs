@@ -23,7 +23,8 @@ public class UIStageMenu : UIModal
     void OnStageSelect(int index)
     {
         StageManager.Instance.selectedStageId = index;
-        SceneLoader.Instance.LoadScene(CustomData.Constants.SCENE_GAME);
         UIManager.Instance.CloseModal(this);
+        
+        SceneLoader.Instance.LoadGameScene();
     }
 }

@@ -14,6 +14,6 @@ public class EffectOnAbility : ConsumeEffect
 
     public override string GetEffectInfo()
     {
-        return $"{type.ToString()}: {value}";
+        return $"{duration}초 간 {type.ToString()}를 {value}만큼 증가";
     }
 }

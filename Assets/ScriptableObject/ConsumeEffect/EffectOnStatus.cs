@@ -13,6 +13,6 @@ public class EffectOnStatus : ConsumeEffect
 
     public override string GetEffectInfo()
     {
-        return $"{type.ToString()}: {value}";
+        return $"{type.ToString()}를 {value}만큼 회복";
     }
 }
