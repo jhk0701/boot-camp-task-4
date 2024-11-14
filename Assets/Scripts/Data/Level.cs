@@ -25,17 +25,16 @@ public class Level : MonoBehaviour
         {
             experience = value;
 
-            if (experience >= requiredExperience)
+            if (experience >= RequiredExperience)
             {
+                experience = experience - RequiredExperience;
                 LevelValue++;
-                experience = experience - requiredExperience;
             }
             
-            OnExperienceChanged?.Invoke(experience, requiredExperience);
+            OnExperienceChanged?.Invoke(experience, RequiredExperience);
         }
     }
-    [SerializeField] float requiredExperience = 100f;
-    public float RequiredExperience { get => requiredExperience; }
+    public float RequiredExperience { get => level * 100f; }
 
     public event Action<int> OnLevelChanged;
     public event Action<float, float> OnExperienceChanged;

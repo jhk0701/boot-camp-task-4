@@ -1,11 +1,15 @@
 using System.Collections;
 using Unity.AI.Navigation;
 using UnityEngine;
+using System;
 
 public class GameManager : Singleton<GameManager>
 {
     [field:SerializeField] public Stage CurrentStage { get; private set; }
     [SerializeField] public ProceduralGenerator mapGenerator;
+    
+    public event Action OnGameOver;
+    
     
     void Awake()
     {
@@ -39,12 +43,16 @@ public class GameManager : Singleton<GameManager>
 
     public void StageEnd(bool playerIsWin)
     {
+        OnGameOver?.Invoke();
+        
         if (playerIsWin) //보상 지급
         {
             GiveReward();
         }
         
         UIManagerGame.Instance.OpenClearUI(playerIsWin);
+
+        OnGameOver = null;
     }
 
     void GiveReward()

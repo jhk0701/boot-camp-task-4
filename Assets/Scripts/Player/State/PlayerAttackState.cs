@@ -45,6 +45,10 @@ public class PlayerAttackState : PlayerBaseState
         {
             // TODO : 코루틴으로 공격 방식 변경
             damagable.TakeDamage(stateMachine.Player.Ability.GetValue(EAbility.Strength));
+
+            Vector3 position = stateMachine.Player.transform.position + Vector3.up;
+            Vector3 direction = stateMachine.Player.Target.transform.position - stateMachine.Player.transform.position;
+            stateMachine.Player.OnAttack?.Invoke(position, direction);
         }
         else
         {

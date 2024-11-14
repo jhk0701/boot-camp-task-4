@@ -15,17 +15,20 @@ public class UIStatusBar : MonoBehaviour
     
         stat.OnValueChange += UpdateUI;
         UpdateUI(stat.Value, stat.GetMax());
+
+        GameManager.Instance.OnGameOver += ReleaseSubscribe;
     }
 
-    private void OnDisable()
-    {
-        RangedStat stat = CharacterManager.Instance.Player.Status.data.status[target] as RangedStat;
-        stat.OnValueChange -= UpdateUI;
-    }
 
     void UpdateUI(float current, float max)
     {
         bar.fillAmount = current / max;
         text.text = $"{current} / {max}";
+    }
+
+    void ReleaseSubscribe()
+    {
+        RangedStat stat = CharacterManager.Instance.Player.Status.data.status[target] as RangedStat;
+        stat.OnValueChange -= UpdateUI;
     }
 }

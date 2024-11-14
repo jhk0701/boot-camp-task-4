@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -15,7 +16,8 @@ public class Player : MonoBehaviour
     
     public Enemy Target { get; set; }
     public PlayerStateMachine stateMachine;
-    
+
+    public UnityEvent<Vector3, Vector3> OnAttack;
 
     void Awake()
     {
@@ -31,6 +33,11 @@ public class Player : MonoBehaviour
     void Start()
     {
         Initialize();
+
+        Status.OnPlayerDead += () =>
+        {
+            GameManager.Instance.StageEnd(false);
+        };
     }
     
     void Update()
