@@ -18,6 +18,7 @@ public class Node
     {
         rect = rectInfo;
     }
+
 }
 
 public class ProceduralGenerator : MonoBehaviour
