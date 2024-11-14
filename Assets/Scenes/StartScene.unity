@@ -1105,7 +1105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   experience: 0
-  requiredExperience: 100
 --- !u!1 &656732219
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,6 +1483,7 @@ GameObject:
   - component: {fileID: 889707592}
   - component: {fileID: 889707597}
   - component: {fileID: 889707598}
+  - component: {fileID: 889707599}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1551,6 +1551,29 @@ MonoBehaviour:
   stages:
   - {fileID: 11400000, guid: fe7e06fea8c3cca4a93a9dba7e7aac91, type: 2}
   selectedStageId: 0
+--- !u!114 &889707599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889707589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00cf31b717fd75c448eb4248c56828b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumables:
+  - {fileID: 11400000, guid: cb22d487795602c4eb220eae38c39b66, type: 2}
+  - {fileID: 11400000, guid: ca5a86d6b944ea94587743cf0b5acfb9, type: 2}
+  - {fileID: 11400000, guid: 1d535a006de00904183a72b6b6f83362, type: 2}
+  - {fileID: 11400000, guid: 9d16dfbae56915849a5431efa41f2ddf, type: 2}
+  equipments:
+  - {fileID: 11400000, guid: 836713bf288eae848b5dd2f123f951ad, type: 2}
+  - {fileID: 11400000, guid: 085499b8b106a9b4896c884fb14c3b91, type: 2}
+  - {fileID: 11400000, guid: 81d816430587b76498069ceb9ad653ad, type: 2}
+  - {fileID: 11400000, guid: dd019f65a714e4240a6d3e82e870b758, type: 2}
+  - {fileID: 11400000, guid: 021311a22262677419a640b0f01d029a, type: 2}
 --- !u!1 &1186840582
 GameObject:
   m_ObjectHideFlags: 0
