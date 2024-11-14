@@ -8,7 +8,7 @@ public class EffectOnStatus : ConsumeEffect
     
     public override void Use()
     {
-        
+        DataManager.Instance.Status.Add(type, value);
     }
 
     public override string GetEffectInfo()

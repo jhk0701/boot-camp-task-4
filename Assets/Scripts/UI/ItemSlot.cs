@@ -13,8 +13,8 @@ public class ItemSlot : Slot
 
     public override void Set()
     {
-        if (inventory.items[index] == null
-            || inventory.items[index].data == null)
+        if (inventory.items[index] == null || 
+            inventory.items[index].data == null)
         {
             Clear();
             return;

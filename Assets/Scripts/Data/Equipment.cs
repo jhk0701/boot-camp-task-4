@@ -39,6 +39,8 @@ public class Equipment : MonoBehaviour
 
         equipments[data.type] = equipment;
         
+        AddEffect(equipments[data.type]);
+        
         OnEquipItem?.Invoke(data.type);
     }
 
@@ -47,6 +49,8 @@ public class Equipment : MonoBehaviour
         if (equipments.ContainsKey(type))
         {
             OnUnequipItem?.Invoke(type);
+
+            RemoveEffect(equipments[type]);
             
             equipments[type] = null;
         }
@@ -59,6 +63,24 @@ public class Equipment : MonoBehaviour
         if (equipments.ContainsKey(type))
         {
             equipments[type].grade++;
+        }
+    }
+
+    void AddEffect(Item equipment)
+    {
+        EquipableItemData data = equipment.data as EquipableItemData;
+        for (int i = 0; i < data.effects.Length; i++)
+        {
+            DataManager.Instance.Ability.Add(data.effects[i].type, data.effects[i].value);
+        }
+    }
+
+    void RemoveEffect(Item equipment)
+    {
+        EquipableItemData data = equipment.data as EquipableItemData;
+        for (int i = 0; i < data.effects.Length; i++)
+        {
+            DataManager.Instance.Ability.Subtract(data.effects[i].type, data.effects[i].value);
         }
     }
     
