@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1012537975fc8e540a7e88f72ac037ef, type: 3}
+  m_Name: Scroll Strength
+  m_EditorClassIdentifier: 
+  itemName: "\uAD34\uB825\uC758 \uC2A4\uD06C\uB864"
+  description: "\uC77C\uC2DC\uC801\uC73C\uB85C \uD798\uC744 \uC99D\uAC00\uC2DC\uD0A8\uB2E4."
+  icon: {fileID: 1870898176, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
+  price: 10
+  canStack: 1
+  maxStackCount: 999
+  effects:
+  - {fileID: 11400000, guid: bb892bbefa989664aa4aaff76f3f6553, type: 2}
+  - {fileID: 11400000, guid: dbead938327d2cd42b1a86e55b1682b6, type: 2}

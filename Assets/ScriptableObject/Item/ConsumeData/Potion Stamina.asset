@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1012537975fc8e540a7e88f72ac037ef, type: 3}
+  m_Name: Potion Stamina
+  m_EditorClassIdentifier: 
+  itemName: "\uC2A4\uD0DC\uBBF8\uB098 \uD3EC\uC158"
+  description: "\uC2A4\uD0DC\uBBF8\uB098 \uD3EC\uC158"
+  icon: {fileID: 994223573, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
+  price: 50
+  canStack: 1
+  maxStackCount: 999
+  effects:
+  - {fileID: 11400000, guid: 0fd2df44335d1b34396af846799d2be0, type: 2}

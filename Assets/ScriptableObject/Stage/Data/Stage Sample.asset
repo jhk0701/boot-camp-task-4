@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58ad64f7847003e43a6a7a856a8d329f, type: 3}
+  m_Name: Stage Sample
+  m_EditorClassIdentifier: 
+  mapName: "\uC0D8\uD50C \uC2A4\uD14C\uC774\uC9C0"
+  mapComponent: {fileID: 4789336472686907779, guid: 570574a5ec99f65448d0fffe1f3280b8,
+    type: 3}
+  mapSize: {x: 100, y: 90}
+  nodeLevel: 3
+  enemyGroup:
+  - enemies:
+    - {fileID: 2031672316668478592, guid: 04d94fd819778bc499bc6dfcbda59d38, type: 3}
+  - enemies:
+    - {fileID: 2031672316668478592, guid: 04d94fd819778bc499bc6dfcbda59d38, type: 3}
+  - enemies:
+    - {fileID: 2031672316668478592, guid: 04d94fd819778bc499bc6dfcbda59d38, type: 3}
+  reward:
+    exp: 100
+    gold: 1000
+    jewelry: 50
+    items:
+    - {fileID: 11400000, guid: 021311a22262677419a640b0f01d029a, type: 2}
+    - {fileID: 11400000, guid: dd019f65a714e4240a6d3e82e870b758, type: 2}
