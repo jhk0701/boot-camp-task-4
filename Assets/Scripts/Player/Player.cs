@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
     void Start()
     {
         Initialize();
+
+        Status.OnPlayerDead += () =>
+        {
+            GameManager.Instance.StageEnd(false);
+        };
     }
     
     void Update()
