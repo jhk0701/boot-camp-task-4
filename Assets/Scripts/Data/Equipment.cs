@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Equipment : MonoBehaviour
 {
-    public Dictionary<EEquipment, EquipableItemData> equipments = new Dictionary<EEquipment, EquipableItemData>();
+    public Dictionary<EEquipment, Item> equipments = new Dictionary<EEquipment, Item>();
     public event Action<EEquipment> OnEquipItem;
     public event Action<EEquipment> OnUnequipItem;
     
@@ -28,17 +28,18 @@ public class Equipment : MonoBehaviour
         DataManager.Instance.PlayerInventory.equipment.Clear();
         foreach (var type in equipments.Keys)
         {
-            DataManager.Instance.PlayerInventory.equipment.Add(new JsonDictionary<EEquipment, EquipableItemData>(){key = type, value = equipments[type]});
+            DataManager.Instance.PlayerInventory.equipment.Add(new JsonDictionary<EEquipment, Item>(){key = type, value = equipments[type]});
         }
     }
     
-    public void Equip(EquipableItemData equipment)
+    public void Equip(Item equipment)
     {
-        Unequip(equipment.type);
+        EquipableItemData data = equipment.data as EquipableItemData;
+        Unequip(data.type);
 
-        equipments[equipment.type] = equipment;
-
-        OnEquipItem?.Invoke(equipment.type);
+        equipments[data.type] = equipment;
+        
+        OnEquipItem?.Invoke(data.type);
     }
 
     public void Unequip(EEquipment type)
@@ -50,7 +51,15 @@ public class Equipment : MonoBehaviour
             equipments[type] = null;
         }
         else
-            equipments.Add(type, null);
+            equipments.Add(type, new Item());
+    }
+
+    public void Upgrade(EEquipment type)
+    {
+        if (equipments.ContainsKey(type))
+        {
+            equipments[type].grade++;
+        }
     }
     
 }

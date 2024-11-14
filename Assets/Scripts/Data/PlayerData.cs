@@ -21,5 +21,5 @@ public class PlayerData
 public class PlayerInventory
 {
     public Item[] inventory;
-    public List<JsonDictionary<EEquipment, EquipableItemData>> equipment;
+    public List<JsonDictionary<EEquipment, Item>> equipment;
 }

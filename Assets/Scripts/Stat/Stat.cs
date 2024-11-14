@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public abstract class Stat
 {
-    public float baseValue;
+    [SerializeField] float baseValue;
     public virtual float Value
     {
         get => baseValue; 

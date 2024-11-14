@@ -6,7 +6,9 @@ public class Item
 {
     public ItemData data;
     public int quantity = 0;
+    public int grade = 0;
 }
+
 
 public class Inventory : MonoBehaviour
 {
@@ -29,12 +31,12 @@ public class Inventory : MonoBehaviour
         DataManager.Instance.PlayerInventory.inventory = items;
     }
 
-    public void AddItem(ItemData data)
+    public void AddItem(Item itemToAdd)
     {
         int index = -1;
-        if (CanStack(data))
+        if (CanStack(itemToAdd.data))
         {
-            Item item = FindItemForStack(data as ConsumableItemData, out index);
+            Item item = FindItemForStack(itemToAdd.data as ConsumableItemData, out index);
             if (item != null)
             {
                 item.quantity++;
@@ -47,47 +49,16 @@ public class Inventory : MonoBehaviour
         Item empty = FindEmpty(out index);
         if (empty != null)
         {
-            empty.data = data;
+            empty.data = itemToAdd.data;
             empty.quantity++;
 
             OnChanged?.Invoke(index);
             return;
         }
         
-        //
-        ThrowItem(data);
+        DisassembleItem(itemToAdd.data);
     }
 
-    public Item FindItem(ItemData data)
-    {
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i].data == null) 
-                continue;
-
-            if (items[i].data == data)
-                return items[i];
-        }
-
-        return null;
-    }
-
-    public Item FindItem(ItemData data, out int index)
-    {
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i].data == null) 
-                continue;
-
-            if (items[i].data == data)
-            {
-                index = i;
-                return items[i];
-            }
-        }
-        index = -1;
-        return null;
-    }
 
     Item FindItemForStack(ConsumableItemData data, out int index)
     {
@@ -123,17 +94,10 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    void ThrowItem(ItemData data)
+    public void DisassembleItem(ItemData data)
     {
-        Vector3 position = transform.position + Vector3.up + transform.forward * 0.5f;
-        // Instantiate(data.dropPrefab, position, Quaternion.identity);
-        Debug.Log("Item destroy");
+        DataManager.Instance.Property.Earn(EProperty.Jewelry, data.jewerlyWhenDisassembled);
     }    
-    
-    public void ThrowItem(int index)
-    {
-        ThrowItem(items[index].data);
-    }
 
 
     public bool RemoveItem(int index, int amount = 1)
@@ -149,14 +113,18 @@ public class Inventory : MonoBehaviour
 
             if(item.quantity <= 0)
             {
-                item.data = null;
-                item.quantity = 0;
+                // TODO : 최적화가 필요할 듯 
+                items[index] = new Item();
+                // item.data = null;
+                // item.quantity = 0;
             }
         }
         else
         {
-            item.data = null;
-            item.quantity = 0;
+            // TODO : 최적화가 필요할 듯 
+            items[index] = new Item();
+            // item.data = null;
+            // item.quantity = 0;
         }
 
         OnChanged?.Invoke(index);

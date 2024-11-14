@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using TMPro;
 
@@ -47,8 +46,7 @@ public class UIInventory : UIModal
 
     private void OnDisable()
     {
-        DataManager.Instance.SaveData(DataManager.Instance.PlayerInventory);
-        
+        selectOption.SetActive(false);
     }
 
     void UpdateUI()
@@ -61,9 +59,9 @@ public class UIInventory : UIModal
 
     void SelectSlot(int id)
     {
-        ItemData data = inventory.items[id].data;
+        Item item = inventory.items[id];
 
-        if(data == null)
+        if(item == null || item.data == null)
         {
             selectOption.SetActive(false);
             return;
@@ -71,7 +69,7 @@ public class UIInventory : UIModal
         
         selectedIndex = id;
 
-        DisplaySelectedItem(data);
+        DisplaySelectedItem(item.data);
     }
 
     void DisplaySelectedItem(ItemData data)
@@ -109,13 +107,25 @@ public class UIInventory : UIModal
     public void OnClickEquip()
     {
         Item item = inventory.items[selectedIndex];
-        EquipableItemData data = item.data as EquipableItemData;
+        if(!item.data is EquipableItemData || item.data == null) return;
 
-        if(data == null) return;
-
-        DataManager.Instance.Equipment.Equip(data);
+        DataManager.Instance.Equipment.Equip(item);
         inventory.RemoveItem(selectedIndex);
         
         UpdateUI();
+    }
+
+    public void OnClickDisassemble()
+    {
+        Item item = inventory.items[selectedIndex];
+        if (item.data == null) return;
+        
+        inventory.DisassembleItem(item.data);
+        inventory.RemoveItem(selectedIndex);
+    }
+
+    public void OnClickClose()
+    {
+        UIManager.Instance.CloseModal(this);
     }
 }

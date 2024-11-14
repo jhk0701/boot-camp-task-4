@@ -16,14 +16,14 @@ public class EquipSlot : Slot
     
     public override void Set()
     {
-        EquipableItemData data;
-        if (!equipment.equipments.TryGetValue(type, out data) || data == null)
+        Item item;
+        if (!equipment.equipments.TryGetValue(type, out item) || item == null)
         {
             Clear();
             return;
         }
 
-        icon.sprite = data.icon;
+        icon.sprite = item.data.icon;
         quantityText.text = ""; // TODO : 업그레이드 정보
 
         // Item item = inventory.items[index];

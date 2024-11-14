@@ -107,7 +107,7 @@ public class DataManager : Singleton<DataManager>
 
         PlayerInventory = new PlayerInventory();
         PlayerInventory.inventory = new Item[CustomData.Constants.INVENTORY_MAX_SIZE];
-        PlayerInventory.equipment = new List<JsonDictionary<EEquipment, EquipableItemData>>();
+        PlayerInventory.equipment = new List<JsonDictionary<EEquipment, Item>>();
         
         OnLoadComplete?.Invoke();
 

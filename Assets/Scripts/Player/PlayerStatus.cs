@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour, IDamagable
 {
     Player player;
-    public Status data => DataManager.Instance.Status;
+    public Status data;
 
     public bool IsDead { get => data.status[EStatus.Health].Value <= 0f; }
     
@@ -15,6 +15,7 @@ public class PlayerStatus : MonoBehaviour, IDamagable
 
     private void Awake()
     {
+        data = DataManager.Instance.Status;
         player = GetComponent<Player>();
     }
 
@@ -27,12 +28,13 @@ public class PlayerStatus : MonoBehaviour, IDamagable
         };
     }
 
-    public void RecoverStatus(EStatus type, float amount)
+    
+    public void Recover(EStatus type, float amount)
     {
         data.Add(type, amount);
     }
 
-    public bool UseStatus(EStatus type, float amount)
+    public bool Use(EStatus type, float amount)
     {
         if (data.status[type].Value - amount < 0)
             return false;
@@ -47,5 +49,4 @@ public class PlayerStatus : MonoBehaviour, IDamagable
         amount = MathF.Max(amount - player.Ability.GetValue(EAbility.Defense), 0f);
         data.status[EStatus.Health].Subtract(amount);
     }
-
 }

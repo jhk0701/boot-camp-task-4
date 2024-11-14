@@ -16,6 +16,7 @@ MonoBehaviour:
   description: "\uC0D8\uD50C \uC2E0\uBC1C"
   icon: {fileID: 1744151977, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
   price: 100
+  jewerlyWhenDisassembled: 10
   type: 4
   effects:
   - type: 2

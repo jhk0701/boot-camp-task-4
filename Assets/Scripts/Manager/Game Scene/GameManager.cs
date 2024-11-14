@@ -32,11 +32,34 @@ public class GameManager : Singleton<GameManager>
         GameObject playerObject = CharacterManager.Instance.CreatePlayer();
         CameraManager.Instance.SetTarget(playerObject.transform);
 
+        yield return null;
+        
         UIManagerGame.Instance.Initialize();
     }
 
     public void StageEnd(bool playerIsWin)
     {
+        if (playerIsWin) //보상 지급
+        {
+            GiveReward();
+        }
+        
         UIManagerGame.Instance.OpenClearUI(playerIsWin);
+    }
+
+    void GiveReward()
+    {
+        DataManager.Instance.Level.AddExperience(CurrentStage.reward.exp);
+        
+        DataManager.Instance.Property.Earn(EProperty.Gold, CurrentStage.reward.gold);
+        DataManager.Instance.Property.Earn(EProperty.Jewelry, CurrentStage.reward.jewelry);
+
+        for (int i = 0; i < CurrentStage.reward.items.Length; i++)
+        {
+           DataManager.Instance.Inventory.AddItem(new Item()
+           {
+               data = CurrentStage.reward.items[i]
+           });
+        }
     }
 }

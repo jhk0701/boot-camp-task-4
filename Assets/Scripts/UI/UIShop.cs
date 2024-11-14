@@ -135,7 +135,10 @@ public class UIShop : UIModal
         if (DataManager.Instance.Property.Pay(EProperty.Gold, item.price))
         {
             // 인벤토리에 추가
-            DataManager.Instance.Inventory.AddItem(item);
+            DataManager.Instance.Inventory.AddItem(new Item()
+            {
+                data = item,
+            });
             // 상인은 물건이 사라지지 않음
             UpdateUI();
         }

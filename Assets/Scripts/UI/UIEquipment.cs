@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class UIEquipment : UIModal
 {
@@ -11,6 +11,12 @@ public class UIEquipment : UIModal
     [SerializeField] Transform slotContainer;
     Dictionary<EEquipment, EquipSlot> equipSlot;
 
+    [Header("Selected")]
+    [SerializeField] GameObject selectOption;
+    [SerializeField] TextMeshProUGUI selectedItemName;
+    [SerializeField] TextMeshProUGUI selectedItemEffects;
+    EEquipment selectedEquipment;
+    
     void Awake()
     {
         equipment = DataManager.Instance.Equipment;
@@ -38,6 +44,11 @@ public class UIEquipment : UIModal
         };
     }
 
+    private void OnDisable()
+    {
+        selectOption.SetActive(false);
+    }
+
     public override void Initialize()
     {
         UpdateUI();
@@ -54,13 +65,31 @@ public class UIEquipment : UIModal
 
     void SelectSlot(int id)
     {
-        // unequip
-        EEquipment type = (EEquipment)id;
-        EquipableItemData data;
-        if (equipment.equipments.TryGetValue(type, out data) && data != null)
+        selectedEquipment = (EEquipment)id;
+        if(!equipment.equipments.ContainsKey(selectedEquipment)) return;
+        
+        selectOption.SetActive(true);
+        selectedItemName.text = equipment.equipments[selectedEquipment].data.itemName;
+        selectedItemEffects.text = equipment.equipments[selectedEquipment].data.GetItemInfo();
+    }
+
+    public void OnClickUnequip()
+    {
+        if (equipment.equipments.TryGetValue(selectedEquipment, out Item item) && item != null)
         {
-            DataManager.Instance.Inventory.AddItem(data);
-            equipment.Unequip(type);
+            DataManager.Instance.Inventory.AddItem(item);
+            equipment.Unequip(selectedEquipment);
+        }
+        
+        selectOption.SetActive(false);
+    }
+
+    public void OnClickUpgrade()
+    {
+        if (equipment.equipments.TryGetValue(selectedEquipment, out Item item) && item != null)
+        {
+            equipment.Upgrade((item.data as EquipableItemData).type);
+            Debug.Log($"item upgrade : {item.grade}");
         }
     }
 }

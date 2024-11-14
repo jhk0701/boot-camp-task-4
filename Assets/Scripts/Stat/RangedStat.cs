@@ -9,13 +9,13 @@ public class RangedStat : Stat
         get => base.Value; 
         protected set 
         {
-            baseValue = value; 
+            base.Value = value; 
             CallOnValueChangeEvent(Value, max);
         }
     }
 
-    [SerializeField] public float max;
-    [SerializeField] public float min;
+    [SerializeField] float max;
+    [SerializeField] float min;
 
     public RangedStat(float initValue, float maxValue)
     {
@@ -34,5 +34,14 @@ public class RangedStat : Stat
         Value = Mathf.Max(Value - amount, min);
     }
 
+    public float GetMax()
+    {
+        return max;
+    }
+
+    public void Improve(float amount)
+    {
+        max += amount;
+    }
     
 }

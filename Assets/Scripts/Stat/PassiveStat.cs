@@ -10,7 +10,7 @@ public class PassiveStat : Stat
         get => base.Value + passiveValue; 
         protected set 
         {
-            baseValue = value;
+            base.Value = value;
             CallOnValueChangeEvent(Value, passiveValue); // 현재값 (+추가값) 형태로 사용
         } 
     }
@@ -33,5 +33,10 @@ public class PassiveStat : Stat
     public override void Subtract(float amount)
     {
         passiveValue = Mathf.Max(passiveValue - amount, 0f);
+    }
+
+    public void Improve(float amount)
+    {
+        base.Value += amount;
     }
 }

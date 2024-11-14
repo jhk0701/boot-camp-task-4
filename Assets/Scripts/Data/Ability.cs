@@ -18,6 +18,7 @@ public struct AbilityData
     public EAbility type;
     public float initialValue;
     public float applyingValue; // 힘 n 당 1의 데미지를 얻기 등등으로 사용 예정
+    public float improveValue; // 레벨 업할 때, 추가되는 능력치
 }
 
 public class Ability : MonoBehaviour
@@ -30,11 +31,11 @@ public class Ability : MonoBehaviour
     {
         DataManager.Instance.OnSave += Save;
         DataManager.Instance.OnLoadComplete += Initialize;
-        
-        foreach (var data in initialData)
+
+        DataManager.Instance.Level.OnLevelChanged += (level) =>
         {
-            applying.Add(data.type, data.applyingValue);
-        }
+            Improve();
+        };
     }
     
     public void Initialize()
@@ -73,5 +74,13 @@ public class Ability : MonoBehaviour
     public void Subtract(EAbility type, float amount)
     {
         ability[type].Subtract(amount);
+    }
+
+    public void Improve()
+    {
+        foreach (var data in initialData)
+        {
+            ability[data.type].Improve(data.improveValue);
+        }
     }
 }

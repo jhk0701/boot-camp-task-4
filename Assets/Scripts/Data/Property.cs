@@ -16,10 +16,6 @@ public struct PropertyData
     public ulong initialValue;
 }
 
-/// <summary>
-/// 플레이어의 보유 자산 정보
-/// 아이템 정보, 재산
-/// </summary>
 public class Property : MonoBehaviour
 {
     public PropertyData[] initialData;

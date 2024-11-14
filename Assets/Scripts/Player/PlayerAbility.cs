@@ -1,16 +1,23 @@
+using System;
 using UnityEngine;
 
 
 public class PlayerAbility : MonoBehaviour
 {
-    public Ability data => DataManager.Instance.Ability;
+    public Ability data;
 
-    public void AddAbility(EAbility type, float amount)
+    private void Awake()
+    {
+        data = DataManager.Instance.Ability;
+    }
+
+    
+    public void Add(EAbility type, float amount)
     {
         data.Add(type, amount);
     }
 
-    public void SubtractAbility(EAbility type, float amount)
+    public void Subtract(EAbility type, float amount)
     {
         data.Subtract(type, amount);
     }

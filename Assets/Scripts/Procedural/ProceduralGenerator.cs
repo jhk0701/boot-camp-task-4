@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Node
 {
@@ -8,6 +10,7 @@ public class Node
     public Node parent;
     public RectInt rect;
     public RectInt roomRect;
+    public Vector3 position;
 
     public Vector2Int center =>
         new Vector2Int(roomRect.x + roomRect.width / 2, roomRect.y + roomRect.height / 2);
@@ -26,7 +29,6 @@ public class ProceduralGenerator : MonoBehaviour
     [Range(0.1f, 1f)] public float minRoomSizeRandomRange = 0.5f;
 
     public Queue<Transform> blockQueue = new Queue<Transform>();
-    
     
     public int nodeLevel = 3;
 
@@ -118,9 +120,11 @@ public class ProceduralGenerator : MonoBehaviour
             rect = node.rect;
             
             GameObject obj = Instantiate(block, transform);
+            obj.name = "Room";
             obj.SetActive(true);
-            int width = (int)Random.Range(rect.width * minRoomSizeRandomRange, rect.width - 2);
-            int height = (int)Random.Range(rect.height * minRoomSizeRandomRange, rect.height - 2);
+            
+            int width = (int)Random.Range((rect.width - 1) * minRoomSizeRandomRange, rect.width - 1);
+            int height = (int)Random.Range((rect.height - 1) * minRoomSizeRandomRange, rect.height - 1);
             int x = rect.x + Random.Range(1, rect.width - width);
             int y = rect.y + Random.Range(1, rect.height - height);
             
@@ -140,9 +144,9 @@ public class ProceduralGenerator : MonoBehaviour
         return rect;
     }
 
-    void GenerateRoad(Node node)
+    void GenerateRoad(Node node, int level = 0)
     {
-        if(node.left == null || node.right == null) return; // leaf 도달
+        if (node.left == null || node.right == null) return; // leaf 도달
 
         Vector2Int left = node.left.center;
         Vector2Int right = node.right.center;
@@ -154,12 +158,12 @@ public class ProceduralGenerator : MonoBehaviour
         obj.SetActive(true);
         
         float distance = Vector2.Distance(left, right);
-        obj.transform.localScale = new Vector3(2f, 1f, distance);
+        obj.transform.localScale = new Vector3(3f, 1f, distance);
         obj.transform.position = Vector3.Lerp(pointLeft, pointRight, 0.5f);
         obj.transform.rotation = Quaternion.LookRotation(pointLeft - pointRight);
 
-        GenerateRoad(node.left);
-        GenerateRoad(node.right);
+        GenerateRoad(node.left, level + 1);
+        GenerateRoad(node.right, level + 1);
     }
     
 }

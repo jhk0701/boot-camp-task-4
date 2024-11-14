@@ -15,6 +15,7 @@ public struct StatusData
 {
     public EStatus type;
     public float maximumValue;
+    public float improveValue; // 레벨 업할 때, 추가되는 능력치
 }
 
 public class Status : MonoBehaviour
@@ -26,6 +27,11 @@ public class Status : MonoBehaviour
     {
         DataManager.Instance.OnSave += Save;
         DataManager.Instance.OnLoadComplete += Initialize;
+
+        DataManager.Instance.Level.OnLevelChanged += (level) =>
+        {
+            Improve();
+        };
     }
 
     public void Initialize()
@@ -63,5 +69,13 @@ public class Status : MonoBehaviour
     public void Subtract(EStatus type, float amount)
     {
         status[type].Subtract(amount);
+    }
+
+    public void Improve()
+    {
+        foreach (var data in initialData)
+        {
+            status[data.type].Improve(data.improveValue);
+        }
     }
 }
