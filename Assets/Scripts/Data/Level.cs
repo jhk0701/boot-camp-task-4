@@ -40,6 +40,25 @@ public class Level : MonoBehaviour
     public event Action<int> OnLevelChanged;
     public event Action<float, float> OnExperienceChanged;
 
+    
+    private void Start()
+    {
+        DataManager.Instance.OnSave += Save;
+        DataManager.Instance.OnLoadComplete += Initialize;
+    }
+
+    public void Initialize()
+    {
+        level = DataManager.Instance.PlayerData.level;
+        experience = DataManager.Instance.PlayerData.experience;
+    }
+
+    void Save()
+    {
+        DataManager.Instance.PlayerData.level = level;
+        DataManager.Instance.PlayerData.experience = experience;
+    }
+    
 
     public void AddExperience(float amount)
     {

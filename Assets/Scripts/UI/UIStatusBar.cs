@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -14,6 +15,12 @@ public class UIStatusBar : MonoBehaviour
     
         stat.OnValueChange += UpdateUI;
         UpdateUI(stat.Value, stat.GetMax());
+    }
+
+    private void OnDisable()
+    {
+        RangedStat stat = CharacterManager.Instance.Player.Status.data.status[target] as RangedStat;
+        stat.OnValueChange -= UpdateUI;
     }
 
     void UpdateUI(float current, float max)

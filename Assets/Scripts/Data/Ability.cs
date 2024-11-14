@@ -36,6 +36,11 @@ public class Ability : MonoBehaviour
         {
             Improve();
         };
+
+        foreach (var data in initialData)
+        {
+            applying.Add(data.type, data.applyingValue);
+        }
     }
     
     public void Initialize()
